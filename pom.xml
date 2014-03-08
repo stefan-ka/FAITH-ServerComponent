@@ -4,7 +4,7 @@
 	<groupId>ch.hsr.faith</groupId>
 	<artifactId>faith-server</artifactId>
 	<packaging>pom</packaging>
-	<version>0.0.2-SNAPSHOT</version>
+	<version>0.0.2</version>
 
 	<modules>
 		<module>faith-parent</module>
@@ -22,7 +22,8 @@
 		<connection>scm:git:git@github.com:SE2Prj-FAITH/FAITH-ServerComponent.git</connection>
 		<developerConnection>scm:git:git@github.com:SE2Prj-FAITH/FAITH-ServerComponent.git</developerConnection>
 		<url>https://github.com/SE2Prj-FAITH/FAITH-ServerComponent</url>
-	</scm>
+	  <tag>faith-server-0.0.2</tag>
+  </scm>
 	
 	<distributionManagement>
     	<repository>
