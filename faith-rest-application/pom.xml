@@ -19,7 +19,7 @@
 		</dependency>
 		<dependency>
 			<groupId>ch.hsr.faith</groupId>
-			<artifactId>faith-database</artifactId>
+			<artifactId>faith-repository</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>ch.hsr.faith</groupId>

@@ -21,7 +21,7 @@
 			</dependency>
 			<dependency>
 				<groupId>ch.hsr.faith</groupId>
-				<artifactId>faith-database</artifactId>
+				<artifactId>faith-repository</artifactId>
 				<version>0.0.1-SNAPSHOT</version>
 			</dependency>
 			<dependency>
