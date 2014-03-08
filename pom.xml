@@ -21,6 +21,17 @@
 	<scm>
 		<developerConnection>scm:git:git@github.com:SE2Prj-FAITH/FAITH-ServerComponent.git</developerConnection>
 	</scm>
+	
+	<distributionManagement>
+    	<repository>
+    		<id>nexus</id>
+    		<url>http://nexus.kapfi.ch/nexus/content/repositories/releases</url>
+    	</repository>
+    	<snapshotRepository>
+    		<id>nexus</id>
+    		<url>http://nexus.kapfi.ch/nexus/content/repositories/snapshots</url>
+   		</snapshotRepository>
+    </distributionManagement>
 
 	<build>
 		<defaultGoal>package</defaultGoal>
