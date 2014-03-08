@@ -19,7 +19,9 @@
 	</properties>
 
 	<scm>
+		<connection>scm:git:git@github.com:SE2Prj-FAITH/FAITH-ServerComponent.git</connection>
 		<developerConnection>scm:git:git@github.com:SE2Prj-FAITH/FAITH-ServerComponent.git</developerConnection>
+		<url>https://github.com/SE2Prj-FAITH/FAITH-ServerComponent</url>
 	</scm>
 	
 	<distributionManagement>
