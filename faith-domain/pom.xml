@@ -4,7 +4,7 @@
 	<parent>
 		<artifactId>faith-parent</artifactId>
 		<groupId>ch.hsr.faith</groupId>
-		<version>0.0.3-SNAPSHOT</version>
+		<version>0.0.5-SNAPSHOT</version>
 		<relativePath>../faith-parent</relativePath>
 	</parent>
 	<artifactId>faith-domain</artifactId>
