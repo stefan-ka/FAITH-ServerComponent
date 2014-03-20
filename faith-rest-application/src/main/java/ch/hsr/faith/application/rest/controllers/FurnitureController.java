@@ -13,16 +13,16 @@ import ch.hsr.faith.domain.Furniture;
 import ch.hsr.faith.service.FurnitureService;
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/furnitures")
 public class FurnitureController extends AbstractController {
 
 	@Autowired
 	private FurnitureService furnitureService;
-	
-	@RequestMapping(value = "/furnitures/all", method = RequestMethod.GET)
+
+	@RequestMapping(value = "/all", method = RequestMethod.GET)
 	public ModelAndView getAllFurnitures(Model model) {
 		List<Furniture> furnituresList = this.furnitureService.findAll();
 		return new ModelAndView(jsonView, DATA_FIELD, furnituresList);
 	}
-	
+
 }

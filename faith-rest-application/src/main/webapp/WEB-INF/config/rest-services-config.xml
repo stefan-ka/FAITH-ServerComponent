@@ -11,6 +11,8 @@
                                     http://www.springframework.org/schema/util  
                                      http://www.springframework.org/schema/util/spring-util-4.0.xsd">
 
+	<import resource="repository-context.xml" />
+
 	<mvc:annotation-driven />
 
 	<context:component-scan base-package="ch.hsr.faith">
