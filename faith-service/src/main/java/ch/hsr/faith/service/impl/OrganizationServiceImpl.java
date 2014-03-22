@@ -20,4 +20,14 @@ public class OrganizationServiceImpl implements OrganizationService {
 		return organizationRepository.findAll();
 	}
 
+	@Override
+	public Organization add(Organization item) {
+		return organizationRepository.save(item);
+	}
+	
+	@Override
+	public Organization get(Long id) {
+		return organizationRepository.findById(id);
+	}
+
 }
