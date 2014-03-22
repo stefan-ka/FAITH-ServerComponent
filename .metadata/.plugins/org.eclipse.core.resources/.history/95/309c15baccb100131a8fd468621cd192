@@ -1,5 +1,0 @@
-package ch.hsr.faith.repository.impl;
-
-public class OrganizationRepositoryImpl implements OrganizationRepository {
-
-}

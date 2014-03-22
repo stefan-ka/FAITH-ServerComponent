@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><testrun name="FurnitureTest" project="faith-repository" tests="2" started="2" failures="0" errors="0" ignored="0">
-  <testsuite name="ch.hsr.faith.repository.FurnitureTest" time="2.981">
-    <testcase name="testFurnitureCreate" classname="ch.hsr.faith.repository.FurnitureTest" time="2.973"/>
-    <testcase name="testFurnitureRead" classname="ch.hsr.faith.repository.FurnitureTest" time="0.007"/>
-  </testsuite>
-</testrun>

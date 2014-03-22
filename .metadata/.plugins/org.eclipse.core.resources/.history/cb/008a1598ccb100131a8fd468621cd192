@@ -1,5 +1,0 @@
-package ch.hsr.faith.repository;
-
-public interface OrganizationRepository {
-
-}

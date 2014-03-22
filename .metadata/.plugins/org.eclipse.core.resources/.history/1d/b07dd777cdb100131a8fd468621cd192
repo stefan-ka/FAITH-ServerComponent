@@ -1,7 +1,0 @@
-package ch.hsr.faith.service.impl;
-
-import ch.hsr.faith.service.FurnitureService;
-
-public class OrganizationServiceImpl implements FurnitureService {
-
-}

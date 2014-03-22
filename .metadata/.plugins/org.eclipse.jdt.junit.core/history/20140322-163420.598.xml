@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><testrun name="FurnitureTest" project="faith-repository" tests="4" started="4" failures="0" errors="0" ignored="0">
-  <testsuite name="ch.hsr.faith.repository.FurnitureTest" time="3.924">
-    <testcase name="testFurnitureCreate" classname="ch.hsr.faith.repository.FurnitureTest" time="3.883"/>
-    <testcase name="testFurnitureDelete" classname="ch.hsr.faith.repository.FurnitureTest" time="0.026"/>
-    <testcase name="testFurnitureUpdate" classname="ch.hsr.faith.repository.FurnitureTest" time="0.008"/>
-    <testcase name="testFurnitureRead" classname="ch.hsr.faith.repository.FurnitureTest" time="0.007"/>
-  </testsuite>
-</testrun>

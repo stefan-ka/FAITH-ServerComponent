@@ -1,5 +1,0 @@
-package ch.hsr.faith.application.rest.controllers;
-
-public class OrganizationController {
-
-}

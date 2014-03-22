@@ -1,6 +1,0 @@
-#Tomcat publish data
-#Sat Mar 22 16:38:48 CET 2014
-org.eclipse.jst.j2ee.server\:faith-domain=WEB-INF/lib/faith-domain-0.0.5-SNAPSHOT.jar
-org.eclipse.jst.jee.server\:/binary\:/home/vetsch/.m2/repository/org/springframework/spring-web/4.0.2.RELEASE/spring-web-4.0.2.RELEASE.jar=WEB-INF/lib/spring-web-4.0.2.RELEASE.jar
-org.eclipse.jst.j2ee.server\:faith-repository=WEB-INF/lib/faith-repository-0.0.5-SNAPSHOT.jar
-org.eclipse.jst.j2ee.server\:faith-service=WEB-INF/lib/faith-service-0.0.5-SNAPSHOT.jar
