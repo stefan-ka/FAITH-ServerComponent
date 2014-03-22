@@ -3,6 +3,8 @@
 /.settings
 .classpath
 .project
+/Servers
+/.metadata
 
 # Package Files #
 *.jar
