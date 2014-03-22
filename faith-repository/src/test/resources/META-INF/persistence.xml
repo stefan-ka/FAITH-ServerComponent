@@ -6,6 +6,7 @@
 		transaction-type="RESOURCE_LOCAL">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<class>ch.hsr.faith.domain.Furniture</class>
+		<class>ch.hsr.faith.domain.Organization</class>
 		<properties>
 			<property name="hibernate.show_sql" value="true" />
 			<property name="hibernate.ejb.naming_strategy" value="org.hibernate.cfg.ImprovedNamingStrategy" />

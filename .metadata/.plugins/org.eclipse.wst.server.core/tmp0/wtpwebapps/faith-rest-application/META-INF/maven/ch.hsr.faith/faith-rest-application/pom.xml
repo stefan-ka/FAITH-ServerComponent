@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>faith-parent</artifactId>
+		<groupId>ch.hsr.faith</groupId>
+		<version>0.0.5-SNAPSHOT</version>
+		<relativePath>../faith-parent</relativePath>
+	</parent>
+	<artifactId>faith-rest-application</artifactId>
+	<packaging>war</packaging>
+
+	<properties>
+		<jackson-mapper-version>1.9.13</jackson-mapper-version>
+	</properties>
+
+	<dependencies>
+		<!-- faith dependencies -->
+		<dependency>
+			<groupId>ch.hsr.faith</groupId>
+			<artifactId>faith-domain</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>ch.hsr.faith</groupId>
+			<artifactId>faith-repository</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>ch.hsr.faith</groupId>
+			<artifactId>faith-service</artifactId>
+		</dependency>
+
+		<!-- Spring dependencies -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+		</dependency>
+
+		<!-- servlet -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>2.5</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- Jackson (for JSON mapping) -->
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>${jackson-mapper-version}</version>
+		</dependency>
+	</dependencies>
+</project>

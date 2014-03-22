@@ -1,0 +1,5 @@
+package ch.hsr.faith.domain;
+
+public class Organization {
+
+}

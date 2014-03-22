@@ -1,0 +1,10 @@
+package ch.hsr.faith.repository.impl.jpa;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+
+import ch.hsr.faith.domain.Furniture;
+
+public interface JpaOrganizationRepository extends JpaRepository<Organization, Long>, JpaSpecificationExecutor<Furniture>  {
+
+}

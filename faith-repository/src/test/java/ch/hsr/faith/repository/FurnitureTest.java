@@ -18,12 +18,57 @@ public class FurnitureTest {
 	private FurnitureRepository furnitureRepository;
 
 	@Test
-	public void test() {
+	public void testFurnitureCreate() {
 		Furniture furniture = new Furniture();
 		furniture.setName("Bett");
 
 		furnitureRepository.save(furniture);
 		assertEquals(1, furnitureRepository.findAll().size());
 	}
+
+	@Test
+	public void testFurnitureRead() {
+		String furnitureName = "MeinBett";
+
+		Furniture furniture = new Furniture();
+		furniture.setName(furnitureName);
+
+		Furniture result = furnitureRepository.save(furniture);
+		Furniture read = furnitureRepository.findById(result.getId());
+		assertEquals(result.getName(), read.getName());
+	}
+
+	@Test
+	public void testFurnitureUpdate() {
+		String furnitureNameInitial = "MeinBett";
+		String furnitureNameUpdated = "DeinBett";
+
+		Furniture furniture = new Furniture();
+		furniture.setName(furnitureNameInitial);
+
+		Furniture result = furnitureRepository.save(furniture);
+		result.setName(furnitureNameUpdated);
+		result = furnitureRepository.save(furniture);
+		Furniture read = furnitureRepository.findById(result.getId());
+		
+		assertEquals(result.getName(), read.getName());
+	}
+	
+	@Test
+	public void testFurnitureDelete() {
+		String furnitureNameInitial = "SeinBett";
+
+		Furniture furniture = new Furniture();
+		furniture.setName(furnitureNameInitial);
+
+		Furniture result = furnitureRepository.save(furniture);
+		Furniture toRemove = new Furniture();
+		toRemove.setId(result.getId());
+		furnitureRepository.delete(toRemove);
+		Furniture read = furnitureRepository.findById(result.getId());
+		
+		assertEquals(read, null);
+	}
+
 
 }

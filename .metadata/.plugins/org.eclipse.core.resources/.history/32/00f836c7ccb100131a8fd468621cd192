@@ -1,0 +1,7 @@
+package ch.hsr.faith.repository.impl;
+
+import ch.hsr.faith.repository.OrganizationRepository;
+
+public class OrganizationRepositoryImpl implements OrganizationRepository {
+
+}

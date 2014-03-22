@@ -1,0 +1,5 @@
+package ch.hsr.faith.repository.impl.jpa;
+
+public class JpaOrganizationRepository {
+
+}

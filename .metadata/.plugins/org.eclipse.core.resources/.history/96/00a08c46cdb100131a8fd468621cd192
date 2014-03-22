@@ -1,0 +1,6 @@
+package ch.hsr.faith.service;
+
+public interface OrganizationService {
+
+	public List<Organization> findAll();
+}

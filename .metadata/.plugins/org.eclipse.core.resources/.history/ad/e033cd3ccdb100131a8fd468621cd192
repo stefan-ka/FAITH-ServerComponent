@@ -1,0 +1,5 @@
+package ch.hsr.faith.service;
+
+public class OrganizationService {
+
+}
