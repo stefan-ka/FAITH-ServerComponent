@@ -3,36 +3,23 @@ package ch.hsr.faith.domain;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 
 @Entity
 public class Address {
-	
+
 	@Id
 	@GeneratedValue
-	private long id;
-
+	private Long id;
 	private String street;
 	private int zip;
 	private String city;
 	private String country;
-	
-	@OneToOne
-	private Organization organization;
 
-	public Organization getOrganization() {
-		return organization;
-	}
-
-	public void setOrganization(Organization organization) {
-		this.organization = organization;
-	}
-
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

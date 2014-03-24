@@ -6,6 +6,7 @@
 		transaction-type="RESOURCE_LOCAL">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<class>ch.hsr.faith.domain.Furniture</class>
+		<class>ch.hsr.faith.domain.FurnitureNeed</class>
 		<class>ch.hsr.faith.domain.Organization</class>
 		<class>ch.hsr.faith.domain.FurnitureCategory</class>
 		<class>ch.hsr.faith.domain.Contact</class>

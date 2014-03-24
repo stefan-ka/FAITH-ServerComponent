@@ -1,28 +1,22 @@
 package ch.hsr.faith.domain;
 
-import java.util.Collection;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 
 @Entity
 public class OrganizationGroup {
+
 	@Id
 	@GeneratedValue
-	private long id;
-	
+	private Long id;
 	private String name;
-	
-	@OneToMany
-	private Collection<Organization> organizations;
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -34,11 +28,4 @@ public class OrganizationGroup {
 		this.name = name;
 	}
 
-	public Collection<Organization> getOrganizations() {
-		return organizations;
-	}
-
-	public void setOrganizations(Collection<Organization> organizations) {
-		this.organizations = organizations;
-	}
 }

@@ -1,23 +1,25 @@
 package ch.hsr.faith.domain;
 
-import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 
 @Entity
 public class Contact {
 
 	@Id
 	@GeneratedValue
-	private long id;
-	public long getId() {
+	private Long id;
+	private String name;
+	private String homepage;
+	private String phone;
+	private String email;
+
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -53,20 +55,4 @@ public class Contact {
 		this.email = email;
 	}
 
-	public List<Organization> getOrganization() {
-		return organization;
-	}
-
-	public void setOrganization(List<Organization> organization) {
-		this.organization = organization;
-	}
-
-	private String name;
-	private String homepage;
-	private String phone;
-	private String email;
-	
-	@OneToMany
-	private List<Organization> organization;
-	
 }

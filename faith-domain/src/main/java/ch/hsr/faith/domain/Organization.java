@@ -1,11 +1,9 @@
 package ch.hsr.faith.domain;
 
-import java.util.Collection;
-
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
@@ -14,32 +12,24 @@ public class Organization {
 
 	@Id
 	@GeneratedValue
-	private long Id;
-
+	private Long id;
 	private String name;
 	private int level;
-
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	private OrganizationGroup organizationGroup;
-
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	private UserAccount userAccount;
-
-	@OneToOne
+	@OneToOne(fetch = FetchType.EAGER)
 	private Contact contact;
-
-	@OneToOne
+	@OneToOne(fetch = FetchType.EAGER)
 	private Address address;
 
-	@ManyToMany
-	private Collection<Furniture> furnitures;
-
-	public long getId() {
-		return Id;
+	public Long getId() {
+		return id;
 	}
 
-	public void setId(long id) {
-		Id = id;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getName() {
@@ -88,14 +78,6 @@ public class Organization {
 
 	public void setAddress(Address address) {
 		this.address = address;
-	}
-
-	public Collection<Furniture> getFurnitures() {
-		return furnitures;
-	}
-
-	public void setFurnitures(Collection<Furniture> furnitures) {
-		this.furnitures = furnitures;
 	}
 
 }

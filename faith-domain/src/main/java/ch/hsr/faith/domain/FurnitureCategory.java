@@ -1,33 +1,26 @@
 package ch.hsr.faith.domain;
 
-import java.util.Collection;
-
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 @Entity
 public class FurnitureCategory {
 
 	@Id
 	@GeneratedValue
-	private long id;
-
+	private Long id;
 	private String name;
-
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	private FurnitureCategory parent;
 
-	@OneToMany
-	private Collection<FurnitureCategory> children;
-
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -47,11 +40,4 @@ public class FurnitureCategory {
 		this.parent = parent;
 	}
 
-	public Collection<FurnitureCategory> getChildren() {
-		return children;
-	}
-
-	public void setChildren(Collection<FurnitureCategory> children) {
-		this.children = children;
-	}
 }

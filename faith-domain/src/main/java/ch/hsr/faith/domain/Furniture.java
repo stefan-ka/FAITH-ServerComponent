@@ -1,11 +1,9 @@
 package ch.hsr.faith.domain;
 
-import java.util.Collection;
-
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 @Entity
@@ -15,29 +13,8 @@ public class Furniture {
 	@GeneratedValue
 	private Long id;
 	private String name;
-
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	private FurnitureCategory furnitureCategory;
-
-	@ManyToMany
-	private Collection<Organization> organizations;
-	
-	public FurnitureCategory getFurnitureCategory() {
-		return furnitureCategory;
-	}
-
-	public void setFurnitureCategory(FurnitureCategory furnitureCategory) {
-		this.furnitureCategory = furnitureCategory;
-	}
-
-	public Collection<Organization> getOrganizations() {
-		return organizations;
-	}
-
-	public void setOrganizations(Collection<Organization> organizations) {
-		this.organizations = organizations;
-	}
-
 
 	public Long getId() {
 		return id;
@@ -45,6 +22,14 @@ public class Furniture {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public FurnitureCategory getFurnitureCategory() {
+		return furnitureCategory;
+	}
+
+	public void setFurnitureCategory(FurnitureCategory furnitureCategory) {
+		this.furnitureCategory = furnitureCategory;
 	}
 
 	public String getName() {
@@ -58,8 +43,6 @@ public class Furniture {
 	@Override
 	public boolean equals(Object obj) {
 		Furniture other = (Furniture) obj;
-
-		return this.getId() == other.getId()
-				&& this.getName().equals(other.getName());
+		return this.getId() == other.getId() && this.getName().equals(other.getName());
 	}
 }

@@ -3,28 +3,28 @@ package ch.hsr.faith.domain;
 import java.util.Collection;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 @Entity
 public class UserAccount {
+
 	@Id
 	@GeneratedValue
-	private long id;
-	
+	private Long id;
 	private String login;
 	private String password;
 	private String email;
-	
-	@OneToMany
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "userAccount")
 	private Collection<Organization> organizations;
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -59,5 +59,5 @@ public class UserAccount {
 	public void setOrganizations(Collection<Organization> organizations) {
 		this.organizations = organizations;
 	}
-	
+
 }
