@@ -7,6 +7,11 @@
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<class>ch.hsr.faith.domain.Furniture</class>
 		<class>ch.hsr.faith.domain.Organization</class>
+		<class>ch.hsr.faith.domain.FurnitureCategory</class>
+		<class>ch.hsr.faith.domain.Contact</class>
+		<class>ch.hsr.faith.domain.Address</class>
+		<class>ch.hsr.faith.domain.UserAccount</class>
+		<class>ch.hsr.faith.domain.OrganizationGroup</class>
 		<properties>
 			<property name="hibernate.ejb.naming_strategy" value="org.hibernate.cfg.ImprovedNamingStrategy" />
 		</properties>
