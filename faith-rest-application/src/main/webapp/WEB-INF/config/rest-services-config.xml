@@ -24,7 +24,7 @@
 		class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />
 	<bean
 		class="org.springframework.web.servlet.view.json.MappingJacksonJsonView">
-		<property name="contentType" value="text/plain" />
+		<property name="contentType" value="application/json;charset=UTF-8" />
 	</bean>
 	<bean
 		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">

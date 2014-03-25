@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import ch.hsr.faith.domain.Furniture;
 import ch.hsr.faith.service.FurnitureService;
@@ -19,10 +19,10 @@ public class FurnitureController extends AbstractController {
 	@Autowired
 	private FurnitureService furnitureService;
 
-	@RequestMapping(value = "/all", method = RequestMethod.GET)
-	public ModelAndView getAllFurnitures(Model model) {
-		List<Furniture> furnituresList = this.furnitureService.findAll();
-		return new ModelAndView(jsonView, DATA_FIELD, furnituresList);
+	@RequestMapping(value = "/all", method = RequestMethod.GET, produces = "application/json")
+	@ResponseBody
+	public List<Furniture> getAllFurnitures(Model model) {
+		return this.furnitureService.findAll();
 	}
 
 }

@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import ch.hsr.faith.domain.Organization;
 import ch.hsr.faith.service.OrganizationService;
@@ -21,21 +20,21 @@ public class OrganizationController extends AbstractController {
 	@Autowired
 	private OrganizationService organizationService;
 
-	@RequestMapping(value = "/all", method = RequestMethod.GET)
-	public ModelAndView getAllOrganizations(Model model) {
-		List<Organization> organizationList = this.organizationService.findAll();
-		return new ModelAndView(jsonView, DATA_FIELD, organizationList);
+	@RequestMapping(value = "/all", method = RequestMethod.GET, produces = "application/json")
+	@ResponseBody
+	public List<Organization> getAllOrganizations(Model model) {
+		return this.organizationService.findAll();
 	}
-	
+
 	@RequestMapping(value = "/add", method = RequestMethod.POST, consumes = "application/json")
-	public ModelAndView addOrganisatzion(Model model, @RequestBody Organization organization) {
-		organization = organizationService.add(organization);
-		return new ModelAndView(jsonView, DATA_FIELD, organization);
+	@ResponseBody
+	public Organization addOrganisatzion(Model model, @RequestBody Organization organization) {
+		return organizationService.add(organization);
 	}
-	
-	@RequestMapping(value = "/first", method = RequestMethod.GET)
-	public ModelAndView getFirstOrganization(Model model) {
-		Organization organization = this.organizationService.get(1l);
-		return new ModelAndView(jsonView, DATA_FIELD, organization);
+
+	@RequestMapping(value = "/first", method = RequestMethod.GET, produces = "application/json")
+	@ResponseBody
+	public Organization getFirstOrganization(Model model) {
+		return this.organizationService.get(1l);
 	}
 }
