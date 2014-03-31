@@ -12,7 +12,7 @@ import ch.hsr.faith.domain.Organization;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration({ "classpath*:META-INF/spring/repository-test-context.xml" })
-public class OrganizationTest {
+public class OrganizationRepositoryTest {
 
 	@Autowired
 	private OrganizationRepository organizationRepository;

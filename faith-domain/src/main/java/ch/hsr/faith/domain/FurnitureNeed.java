@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class FurnitureNeed {
+public class FurnitureNeed implements BaseEntity {
 
 	@Id
 	@GeneratedValue

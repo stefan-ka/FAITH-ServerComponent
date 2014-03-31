@@ -8,7 +8,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 @Entity
-public class Organization {
+public class Organization implements BaseEntity {
 
 	@Id
 	@GeneratedValue

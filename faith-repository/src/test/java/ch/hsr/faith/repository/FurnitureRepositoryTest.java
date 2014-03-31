@@ -12,7 +12,7 @@ import ch.hsr.faith.domain.Furniture;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration({ "classpath*:META-INF/spring/repository-test-context.xml" })
-public class FurnitureTest {
+public class FurnitureRepositoryTest {
 
 	@Autowired
 	private FurnitureRepository furnitureRepository;

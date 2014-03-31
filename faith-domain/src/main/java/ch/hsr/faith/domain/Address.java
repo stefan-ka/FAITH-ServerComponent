@@ -5,7 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-public class Address {
+public class Address implements BaseEntity {
 
 	@Id
 	@GeneratedValue
