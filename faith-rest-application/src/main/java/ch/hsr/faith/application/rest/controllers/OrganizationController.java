@@ -1,7 +1,5 @@
 package ch.hsr.faith.application.rest.controllers;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import ch.hsr.faith.application.rest.dto.BaseJSONResponse;
 import ch.hsr.faith.domain.Organization;
 import ch.hsr.faith.service.OrganizationService;
 
@@ -20,21 +19,21 @@ public class OrganizationController extends AbstractController {
 	@Autowired
 	private OrganizationService organizationService;
 
-	@RequestMapping(value = "/all", method = RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value = "/all", method = RequestMethod.GET)
 	@ResponseBody
-	public List<Organization> getAllOrganizations(Model model) {
-		return this.organizationService.findAll();
+	public BaseJSONResponse getAllOrganizations(Model model) {
+		return createResponse(BaseJSONResponse.STATUS_SUCCESS, this.organizationService.findAll());
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST, consumes = "application/json")
 	@ResponseBody
-	public Organization addOrganisatzion(Model model, @RequestBody Organization organization) {
-		return organizationService.add(organization);
+	public BaseJSONResponse addOrganisatzion(Model model, @RequestBody Organization organization) {
+		return createResponse(BaseJSONResponse.STATUS_SUCCESS, organizationService.add(organization));
 	}
 
-	@RequestMapping(value = "/first", method = RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value = "/first", method = RequestMethod.GET)
 	@ResponseBody
-	public Organization getFirstOrganization(Model model) {
-		return this.organizationService.get(1l);
+	public BaseJSONResponse getFirstOrganization(Model model) {
+		return createResponse(BaseJSONResponse.STATUS_SUCCESS, this.organizationService.get(1l));
 	}
 }

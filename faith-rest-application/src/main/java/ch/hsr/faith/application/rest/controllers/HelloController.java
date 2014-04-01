@@ -4,31 +4,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import ch.hsr.faith.application.rest.dto.BaseJSONResponse;
 
 @Controller
 @RequestMapping("/")
 public class HelloController extends AbstractController {
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public ModelAndView showProduct(Model model) {
-		WelcomeMessage message = new WelcomeMessage();
-		message.setMessage("Welcome to the FAITH Rest Services!");
-
-		return new ModelAndView(jsonView, DATA_FIELD, message);
+	@ResponseBody
+	public BaseJSONResponse showProduct(Model model) {
+		BaseJSONResponse message = new BaseJSONResponse(BaseJSONResponse.STATUS_SUCCESS);
+		message.setData("Welcome to the FAITH Rest Services!");
+		return message;
 	}
-
-	private class WelcomeMessage {
-		private String message;
-
-		@SuppressWarnings("unused")
-		public String getMessage() {
-			return message;
-		}
-
-		public void setMessage(String message) {
-			this.message = message;
-		}
-	}
-
 }

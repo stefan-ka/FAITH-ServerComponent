@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import ch.hsr.faith.application.rest.validator.ValidationMessages;
+import ch.hsr.faith.application.rest.dto.BaseJSONResponse;
 import ch.hsr.faith.exception.FAITHException;
 
 @ControllerAdvice
@@ -25,33 +25,37 @@ public class RestGlobalExceptionHandler {
 	private MessageSource messageSource;
 
 	@ExceptionHandler(Exception.class)
-	@ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
+	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody
-	public ErrorInfo handleUnhandledExceptions(HttpServletRequest request, Exception exception) {
-		return new ErrorInfo(request.getRequestURL().toString(), exception.getMessage());
+	public BaseJSONResponse handleUnhandledExceptions(HttpServletRequest request, Exception exception) {
+		BaseJSONResponse response = new BaseJSONResponse(BaseJSONResponse.STATUS_ERROR);
+		response.setErrorMessage(exception.getMessage());
+		return response;
 	}
 
 	@ExceptionHandler(FAITHException.class)
-	@ResponseStatus(value = HttpStatus.BAD_REQUEST)
+	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody
-	public ErrorInfo handleFaithException(HttpServletRequest request, FAITHException faithException) {
-		return new ErrorInfo(request.getRequestURL().toString(), faithException.getMessage());
+	public BaseJSONResponse handleFaithException(HttpServletRequest request, FAITHException faithException) {
+		BaseJSONResponse response = new BaseJSONResponse(BaseJSONResponse.STATUS_FAIL);
+		response.addFailure(faithException.getMessage());
+		return response;
 	}
 
 	@ExceptionHandler(MethodArgumentNotValidException.class)
-	@ResponseStatus(HttpStatus.BAD_REQUEST)
+	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody
-	public ValidationMessages handleValidationMessages(MethodArgumentNotValidException exception) {
-		ValidationMessages validationMessages = new ValidationMessages();
+	public BaseJSONResponse handleValidationMessages(MethodArgumentNotValidException exception) {
+		BaseJSONResponse response = new BaseJSONResponse(BaseJSONResponse.STATUS_FAIL);
 		BindingResult result = exception.getBindingResult();
 
 		for (FieldError fieldError : result.getFieldErrors()) {
-			validationMessages.addFieldError(messageSource.getMessage(fieldError.getCode(), null, LocaleContextHolder.getLocale()));
+			response.addFailure(messageSource.getMessage(fieldError.getCode(), null, LocaleContextHolder.getLocale()));
 		}
 		for (ObjectError globalError : result.getGlobalErrors()) {
-			validationMessages.addFieldError(messageSource.getMessage(globalError.getCode(), null, LocaleContextHolder.getLocale()));
+			response.addFailure(messageSource.getMessage(globalError.getCode(), null, LocaleContextHolder.getLocale()));
 		}
-		return validationMessages;
+		return response;
 	}
 
 }

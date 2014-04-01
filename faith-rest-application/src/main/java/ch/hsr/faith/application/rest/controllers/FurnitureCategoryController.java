@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import ch.hsr.faith.application.rest.dto.BaseJSONResponse;
 import ch.hsr.faith.domain.FurnitureCategory;
 import ch.hsr.faith.exception.FAITHException;
 import ch.hsr.faith.service.FurnitureCategoryService;
@@ -21,18 +22,18 @@ public class FurnitureCategoryController extends AbstractController {
 	@Autowired
 	private FurnitureCategoryService furnitureCategoryService;
 
-	@RequestMapping(value = "/all-roots", method = RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value = "/all-roots", method = RequestMethod.GET)
 	@ResponseBody
-	public List<FurnitureCategory> getAllFurnitures(Model model) {
+	public BaseJSONResponse getAllFurnitures(Model model) {
 		List<FurnitureCategory> furnitureCategoryList = this.furnitureCategoryService.findRootCategories();
-		return furnitureCategoryList;
+		return createResponse(BaseJSONResponse.STATUS_SUCCESS, furnitureCategoryList);
 	}
 
-	@RequestMapping(value = "/get/{id}", method = RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value = "/get/{id}", method = RequestMethod.GET)
 	@ResponseBody
-	public FurnitureCategory editSmartphonePage(@PathVariable long id) throws FAITHException {
+	public BaseJSONResponse editSmartphonePage(@PathVariable long id) throws FAITHException {
 		FurnitureCategory furnitureCategory = this.furnitureCategoryService.findById(id);
-		return furnitureCategory;
+		return createResponse(BaseJSONResponse.STATUS_SUCCESS, furnitureCategory);
 	}
 
 }

@@ -7,4 +7,6 @@ public interface UserAccountService {
 
 	public UserAccount save(UserAccount userAccount) throws FAITHException;
 
+	public boolean doesUserNameAlreadyExist(String userName);
+
 }

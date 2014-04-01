@@ -11,6 +11,8 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class UserAccount implements BaseEntity {
 
@@ -27,6 +29,7 @@ public class UserAccount implements BaseEntity {
 	@NotNull
 	@Size(min = 1)
 	private String email;
+	@JsonIgnore
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "userAccount")
 	private Collection<Organization> organizations;
 

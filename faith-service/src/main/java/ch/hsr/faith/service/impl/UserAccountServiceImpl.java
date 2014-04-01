@@ -36,4 +36,10 @@ public class UserAccountServiceImpl implements UserAccountService {
 		return userAccountRepository.save(userAccount);
 	}
 
+	@Override
+	public boolean doesUserNameAlreadyExist(String userName) {
+		UserAccount userAccount = userAccountRepository.findByUserName(userName);
+		return userAccount != null;
+	}
+
 }

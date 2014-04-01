@@ -1,13 +1,18 @@
 package ch.hsr.faith.application.rest.validator;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 import ch.hsr.faith.domain.UserAccount;
+import ch.hsr.faith.service.UserAccountService;
 
 @Component
 public class UserAccountValidator implements Validator {
+	
+	@Autowired
+	private UserAccountService userAccountService;
 
 	@Override
 	public boolean supports(Class<?> clazz) {
@@ -26,6 +31,9 @@ public class UserAccountValidator implements Validator {
 			}
 			if (userAccount.getPassword() == null || "".equals(userAccount.getPassword())) {
 				errors.rejectValue("password", "emptyField.useraccount.password");
+			}
+			if(userAccountService.doesUserNameAlreadyExist(userAccount.getUserName())) {
+				errors.rejectValue("userName", "emptyField.useraccount.username.notunique");
 			}
 		}
 	}
