@@ -40,4 +40,31 @@ public class FurnitureCategory implements BaseEntity {
 		this.parent = parent;
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+
+		FurnitureCategory other = (FurnitureCategory) obj;
+
+		if (!this.getId().equals(other.getId())) {
+			return false;
+		}
+		if (!this.getName().equals(other.getName())) {
+			return false;
+		}
+		if (this.getParent() == null && other.getParent() == null) {
+			return true;
+		} else {
+			if (!this.getParent().equals(other.getParent())) {
+				return false;
+			}
+		}
+		return true;
+	}
+
 }

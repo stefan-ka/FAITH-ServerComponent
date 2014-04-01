@@ -1,10 +1,12 @@
 package ch.hsr.faith.repository;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import javax.validation.ConstraintViolationException;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,16 +22,24 @@ public class UserAccountRepositoryTest {
 	@Autowired
 	private UserAccountRepository userAccountRepository;
 
+	private UserAccount validUserAccount;
+	private long inexistendUserId;
+
+	@Before
+	public void setUp() {
+		validUserAccount = new UserAccount();
+		validUserAccount.setUserName("test-user");
+		validUserAccount.setPassword("123456");
+		validUserAccount.setEmail("test@mail.com");
+	}
+
 	@Test
 	public void testCreate() {
-		UserAccount userAccount = new UserAccount();
-		userAccount.setUserName("test-user");
-		userAccount.setPassword("123456");
-		userAccount.setEmail("test@mail.com");
 
-		UserAccount savedUserAccount = userAccountRepository.save(userAccount);
+		UserAccount savedUserAccount = userAccountRepository
+				.save(validUserAccount);
 		assertTrue(savedUserAccount.getId().compareTo(new Long(0)) > 0);
-		assertEquals(savedUserAccount, userAccount);
+		assertEquals(savedUserAccount, validUserAccount);
 	}
 
 	@Test(expected = ConstraintViolationException.class)
@@ -38,4 +48,42 @@ public class UserAccountRepositoryTest {
 		userAccountRepository.save(userAccount);
 	}
 
+	@Test
+	public void testDelete() {
+		validUserAccount.setUserName("UserForDeletionTest");
+		UserAccount savedUserAccount = userAccountRepository
+				.save(validUserAccount);
+		userAccountRepository.delete(savedUserAccount);
+		assertNull(userAccountRepository.findById(savedUserAccount.getId()));
+	}
+
+	@Test
+	public void testFindById() {
+		validUserAccount.setUserName("UserForFindByIdNameTest");
+		UserAccount savedUserAccount = userAccountRepository
+				.save(validUserAccount);
+		assertEquals(validUserAccount,
+				userAccountRepository.findById(savedUserAccount.getId()));
+	}
+
+	@Test
+	public void testFindByUserName() {
+		validUserAccount.setUserName("UserForFindByUserNameTest");
+		UserAccount savedUserAccount = userAccountRepository
+				.save(validUserAccount);
+		assertEquals(validUserAccount,
+				userAccountRepository.findByUserName(savedUserAccount
+						.getUserName()));
+	}
+
+	@Test
+	public void testFindInexistendUserById() {
+		assertNull(userAccountRepository.findById(inexistendUserId));
+	}
+
+	@Test
+	public void testFindInexistendByUserName() {
+		assertNull(userAccountRepository
+				.findByUserName("InexistendUserName"));
+	}
 }
