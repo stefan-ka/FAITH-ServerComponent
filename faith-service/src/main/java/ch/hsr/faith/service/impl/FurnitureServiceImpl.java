@@ -20,4 +20,9 @@ public class FurnitureServiceImpl implements FurnitureService {
 		return this.furnitureRepository.findAll();
 	}
 
+	@Override
+	public Furniture create(Furniture item) {
+		return furnitureRepository.save(item);
+	}
+
 }

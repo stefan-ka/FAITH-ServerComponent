@@ -2,13 +2,18 @@ package ch.hsr.faith.repository;
 
 import static org.junit.Assert.assertEquals;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import ch.hsr.faith.domain.Address;
+import ch.hsr.faith.domain.Contact;
 import ch.hsr.faith.domain.Organization;
+import ch.hsr.faith.domain.OrganizationGroup;
+import ch.hsr.faith.domain.UserAccount;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration({ "classpath*:META-INF/spring/repository-test-context.xml" })
@@ -17,83 +22,50 @@ public class OrganizationRepositoryTest {
 	@Autowired
 	private OrganizationRepository organizationRepository;
 
+	Organization organization;
+
+	@Before
+	public void setUp() {
+		organization = new Organization();
+		organization.setName("Heim");
+		organization.setLevel(3);
+	}
+
 	@Test
 	public void testOrganizationCreate() {
-		Organization organization = new Organization();
-		organization.setName("Heim");
-
-		// TODO: @Mathias: please fix ...
-		// organization.setCity("Rapperswil");
-		// organization.setZip(8640);
-		// organization.setHomepage("www.faith.com");
-		// organization.setAddress("Eichfeldstrasse 20");
-		// organization.setState(3);
-
-		organizationRepository.save(organization);
-		assertEquals(1, organizationRepository.findAll().size());
+		organization.setName("CreatOrg");
+		Organization persistentOrganization = organizationRepository.save(organization);
+		assertEquals(persistentOrganization, organizationRepository.findById(persistentOrganization.getId()));
 	}
 
 	@Test
 	public void testOrganizationRead() {
-		Organization organization = new Organization();
-		organization.setName("Heim");
-		// TODO: @Mathias: please fix ...
-		// organization.setCity("Rapperswil");
-		// organization.setZip(8640);
-		// organization.setHomepage("www.faith.com");
-		// organization.setAddress("Eichfeldstrasse 20");
-		// organization.setState(3);
-
 		Organization result = organizationRepository.save(organization);
 		Organization read = organizationRepository.findById(result.getId());
-
-		// TODO: @Mathias: Objekte koennen nicht so verglichen werden!
-		// (equals-Methode wurde in den Domain-Objekten nicht implementiert)
-		// assertEquals(result, read);
+		
+		assertEquals(result, read);
 	}
 
 	@Test
 	public void testOrganizationUpdate() {
-		Organization organization = new Organization();
-		organization.setName("Heim");
-		// TODO: @Mathias: please fix ...
-		// organization.setCity("Rapperswil");
-		// organization.setZip(8640);
-		// organization.setHomepage("www.faith.com");
-		// organization.setAddress("Eichfeldstrasse 20");
-		// organization.setState(3);
 
 		Organization result = organizationRepository.save(organization);
 
-		organization = new Organization();
-		organization.setId(result.getId());
-		organization.setName("BrockenHaus");
-		// TODO: @Mathias: please fix ...
-		// organization.setCity("Grabs");
-		// organization.setZip(9472);
-		// organization.setHomepage("www.grabs.ch");
-		// organization.setAddress("Leversberg 2456");
-		// organization.setState(2);
-
+		
+		Organization updatedOrganization = new Organization();
+		updatedOrganization.setId(result.getId());
+		updatedOrganization.setName("BrockenHaus");
+		updatedOrganization.setLevel(1);
+		
 		organizationRepository.save(organization);
-
 		Organization read = organizationRepository.findById(result.getId());
 
-		// TODO: @Mathias: Objekte koennen nicht so verglichen werden!
-		// (equals-Methode wurde in den Domain-Objekten nicht implementiert)
-		// assertEquals(organization, read);
+		assertEquals(organization, read);
 	}
 
 	@Test
 	public void testOrganizationDelete() {
-		Organization organization = new Organization();
-		organization.setName("Heim");
-		// TODO: @Mathias: please fix ...
-		// organization.setCity("Rapperswil");
-		// organization.setZip(8640);
-		// organization.setHomepage("www.faith.com");
-		// organization.setAddress("Eichfeldstrasse 20");
-		// organization.setState(3);
+
 
 		Organization result = organizationRepository.save(organization);
 
