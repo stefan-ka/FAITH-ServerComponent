@@ -1,22 +1,11 @@
 package ch.hsr.faith.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-
-@Entity
 public class Facility implements BaseEntity {
 
-	@Id
-	@GeneratedValue
 	private Long id;
 	private String name;
 	private int level;
-	@ManyToOne(fetch = FetchType.EAGER)
 	private FacilityCategory facilityCategory;
-	@ManyToOne(fetch = FetchType.EAGER)
 	private UserAccount userAccount;
 	private String street;
 	private Integer zip;

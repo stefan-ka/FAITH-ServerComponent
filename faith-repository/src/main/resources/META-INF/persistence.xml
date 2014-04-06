@@ -5,13 +5,14 @@
 	<persistence-unit name="faith-database"
 		transaction-type="RESOURCE_LOCAL">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
-		<class>ch.hsr.faith.domain.PieceOfFurniture</class>
-		<class>ch.hsr.faith.domain.ItemNeeded</class>
-		<class>ch.hsr.faith.domain.Facility</class>
-		<class>ch.hsr.faith.domain.FurnitureCategory</class>
-		<class>ch.hsr.faith.domain.UserAccount</class>
-		<class>ch.hsr.faith.domain.FacilityCategory</class>
+		<mapping-file>jpa/Facility-orm.xml</mapping-file>
+		<mapping-file>jpa/FacilityCategory-orm.xml</mapping-file>
+		<mapping-file>jpa/FurnitureCategory-orm.xml</mapping-file>
+		<mapping-file>jpa/ItemNeeded-orm.xml</mapping-file>
+		<mapping-file>jpa/PieceOfFurniture-orm.xml</mapping-file>
+		<mapping-file>jpa/UserAccount-orm.xml</mapping-file>
 		<properties>
+			<property name="hibernate.show_sql" value="true" />
 			<property name="hibernate.ejb.naming_strategy" value="org.hibernate.cfg.ImprovedNamingStrategy" />
 		</properties>
 	</persistence-unit>

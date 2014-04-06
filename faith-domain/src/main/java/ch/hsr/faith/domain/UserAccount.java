@@ -2,34 +2,23 @@ package ch.hsr.faith.domain;
 
 import java.util.Collection;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-@Entity
 public class UserAccount implements BaseEntity {
 
-	@Id
-	@GeneratedValue
 	private Long id;
 	@NotNull
 	@Size(min = 1)
 	private String password;
 	@NotNull
 	@Size(min = 1)
-	@Column(unique = true)
 	private String email;
 	private Integer donations;
 	private Integer level;
 	@JsonIgnore
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "userAccount")
 	private Collection<Facility> facilities;
 
 	public Long getId() {

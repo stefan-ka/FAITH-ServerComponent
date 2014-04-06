@@ -1,19 +1,9 @@
 package ch.hsr.faith.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-
-@Entity
 public class FurnitureCategory implements BaseEntity {
 
-	@Id
-	@GeneratedValue
 	private Long id;
 	private String name;
-	@ManyToOne(fetch = FetchType.EAGER)
 	private FurnitureCategory parent;
 
 	public Long getId() {

@@ -1,22 +1,11 @@
 package ch.hsr.faith.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-
-@Entity
 public class ItemNeeded implements BaseEntity {
 
-	@Id
-	@GeneratedValue
 	private Long id;
 	private String description;
 	private Integer amount;
-	@ManyToOne(fetch = FetchType.EAGER)
 	private PieceOfFurniture pieceOfFurniture;
-	@ManyToOne(fetch = FetchType.EAGER)
 	private Facility facility;
 	
 	public Long getId() {

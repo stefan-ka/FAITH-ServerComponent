@@ -1,47 +1,44 @@
 package ch.hsr.faith.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-
-@Entity
 public class PieceOfFurniture implements BaseEntity {
 
-	@Id
-	@GeneratedValue
 	private Long id;
 	private String name;
 	private Integer value;
-	@ManyToOne(fetch = FetchType.EAGER)
 	private FurnitureCategory furnitureCategory;
-	
+
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
+
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	public Integer getValue() {
 		return value;
 	}
+
 	public void setValue(Integer value) {
 		this.value = value;
 	}
+
 	public FurnitureCategory getFurnitureCategory() {
 		return furnitureCategory;
 	}
+
 	public void setFurnitureCategory(FurnitureCategory furnitureCategory) {
 		this.furnitureCategory = furnitureCategory;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -52,7 +49,7 @@ public class PieceOfFurniture implements BaseEntity {
 		result = prime * result + ((value == null) ? 0 : value.hashCode());
 		return result;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
