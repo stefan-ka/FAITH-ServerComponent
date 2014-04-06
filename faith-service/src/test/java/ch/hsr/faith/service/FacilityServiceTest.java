@@ -11,54 +11,54 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import ch.hsr.faith.domain.Organization;
+import ch.hsr.faith.domain.Facility;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration({ "classpath*:META-INF/spring/service-test-context.xml" })
-public class OrganizationServiceTest {
-	
+public class FacilityServiceTest {
+
 	@Autowired
-	private OrganizationService organizationService;
-	
-	Organization organization1, organization2;
+	private FacilityService facilityService;
+
+	Facility organization1, organization2;
 	long nonExistingId = 65537;
-	
+
 	@Before
-	public void setUp() { 
-		organization1 = new Organization();
+	public void setUp() {
+		organization1 = new Facility();
 		organization1.setName("Org1");
-		organization1 = organizationService.add(organization1);
-		organization2 = new Organization();
+		organization1 = facilityService.add(organization1);
+		organization2 = new Facility();
 		organization2.setName("Org2");
-		organization2 = organizationService.add(organization2);
-	}
-	
-	@Test
-	public void testFindAll() {
-		List<Organization> allFoundOrganizations = organizationService.findAll();
-		assertEquals(2, allFoundOrganizations.size());
-	}
-	
-	@Test
-	public void testExistingGet() {
-		Organization foundById = organizationService.get(organization1.getId());
-		assertEquals(organization1, foundById);
-		
-	}
-	
-	@Test
-	public void testNonExistingGet() {
-		Organization foundById = organizationService.get(nonExistingId);
-		assertEquals(null, foundById);
-		
+		organization2 = facilityService.add(organization2);
 	}
 
 	@Test
-	public void testOrgAdd() { 
-		Organization myOrg = new Organization();
+	public void testFindAll() {
+		List<Facility> allFoundOrganizations = facilityService.findAll();
+		assertEquals(2, allFoundOrganizations.size());
+	}
+
+	@Test
+	public void testExistingGet() {
+		Facility foundById = facilityService.get(organization1.getId());
+		assertEquals(organization1, foundById);
+
+	}
+
+	@Test
+	public void testNonExistingGet() {
+		Facility foundById = facilityService.get(nonExistingId);
+		assertEquals(null, foundById);
+
+	}
+
+	@Test
+	public void testOrgAdd() {
+		Facility myOrg = new Facility();
 		myOrg.setName("myName");
-		myOrg = organizationService.add(myOrg);
-		assertEquals(myOrg, organizationService.get(myOrg.getId()));
+		myOrg = facilityService.add(myOrg);
+		assertEquals(myOrg, facilityService.get(myOrg.getId()));
 	}
 
 }

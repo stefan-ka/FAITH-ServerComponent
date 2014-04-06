@@ -7,49 +7,52 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class FurnitureCategory implements BaseEntity {
+public class PieceOfFurniture implements BaseEntity {
 
 	@Id
 	@GeneratedValue
 	private Long id;
 	private String name;
+	private Integer value;
 	@ManyToOne(fetch = FetchType.EAGER)
-	private FurnitureCategory parent;
-
+	private FurnitureCategory furnitureCategory;
+	
 	public Long getId() {
 		return id;
 	}
-
 	public void setId(Long id) {
 		this.id = id;
 	}
-
 	public String getName() {
 		return name;
 	}
-
 	public void setName(String name) {
 		this.name = name;
 	}
-
-	public FurnitureCategory getParent() {
-		return parent;
+	public Integer getValue() {
+		return value;
 	}
-
-	public void setParent(FurnitureCategory parent) {
-		this.parent = parent;
+	public void setValue(Integer value) {
+		this.value = value;
 	}
-
+	public FurnitureCategory getFurnitureCategory() {
+		return furnitureCategory;
+	}
+	public void setFurnitureCategory(FurnitureCategory furnitureCategory) {
+		this.furnitureCategory = furnitureCategory;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((furnitureCategory == null) ? 0 : furnitureCategory.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((parent == null) ? 0 : parent.hashCode());
+		result = prime * result + ((value == null) ? 0 : value.hashCode());
 		return result;
 	}
-
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -58,7 +61,12 @@ public class FurnitureCategory implements BaseEntity {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		FurnitureCategory other = (FurnitureCategory) obj;
+		PieceOfFurniture other = (PieceOfFurniture) obj;
+		if (furnitureCategory == null) {
+			if (other.furnitureCategory != null)
+				return false;
+		} else if (!furnitureCategory.equals(other.furnitureCategory))
+			return false;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -69,10 +77,10 @@ public class FurnitureCategory implements BaseEntity {
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
-		if (parent == null) {
-			if (other.parent != null)
+		if (value == null) {
+			if (other.value != null)
 				return false;
-		} else if (!parent.equals(other.parent))
+		} else if (!value.equals(other.value))
 			return false;
 		return true;
 	}

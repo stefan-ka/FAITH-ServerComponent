@@ -11,6 +11,6 @@ import ch.hsr.faith.domain.UserAccount;
 @Repository
 public interface JpaUserAccountRepository extends JpaRepository<UserAccount, Long>, JpaSpecificationExecutor<UserAccount> {
 
-	public abstract List<UserAccount> findByUserName(String userName);
+	public abstract List<UserAccount> findByEmail(String email);
 
 }

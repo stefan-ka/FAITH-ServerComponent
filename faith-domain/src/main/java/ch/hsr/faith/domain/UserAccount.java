@@ -21,17 +21,16 @@ public class UserAccount implements BaseEntity {
 	private Long id;
 	@NotNull
 	@Size(min = 1)
-	@Column(unique = true)
-	private String userName;
-	@NotNull
-	@Size(min = 1)
 	private String password;
 	@NotNull
 	@Size(min = 1)
+	@Column(unique = true)
 	private String email;
+	private Integer donations;
+	private Integer level;
 	@JsonIgnore
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "userAccount")
-	private Collection<Organization> organizations;
+	private Collection<Facility> facilities;
 
 	public Long getId() {
 		return id;
@@ -39,14 +38,6 @@ public class UserAccount implements BaseEntity {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
 	}
 
 	public String getPassword() {
@@ -65,21 +56,40 @@ public class UserAccount implements BaseEntity {
 		this.email = email;
 	}
 
-	public Collection<Organization> getOrganizations() {
-		return organizations;
+	public Integer getDonations() {
+		return donations;
 	}
 
-	public void setOrganizations(Collection<Organization> organizations) {
-		this.organizations = organizations;
+	public void setDonations(Integer donations) {
+		this.donations = donations;
+	}
+
+	public Integer getLevel() {
+		return level;
+	}
+
+	public void setLevel(Integer level) {
+		this.level = level;
+	}
+
+	public Collection<Facility> getFacilities() {
+		return facilities;
+	}
+
+	public void setFacilities(Collection<Facility> facilities) {
+		this.facilities = facilities;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((donations == null) ? 0 : donations.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result + ((facilities == null) ? 0 : facilities.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((level == null) ? 0 : level.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
-		result = prime * result + ((userName == null) ? 0 : userName.hashCode());
 		return result;
 	}
 
@@ -92,20 +102,35 @@ public class UserAccount implements BaseEntity {
 		if (getClass() != obj.getClass())
 			return false;
 		UserAccount other = (UserAccount) obj;
+		if (donations == null) {
+			if (other.donations != null)
+				return false;
+		} else if (!donations.equals(other.donations))
+			return false;
 		if (email == null) {
 			if (other.email != null)
 				return false;
 		} else if (!email.equals(other.email))
 			return false;
+		if (facilities == null) {
+			if (other.facilities != null)
+				return false;
+		} else if (!facilities.equals(other.facilities))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (level == null) {
+			if (other.level != null)
+				return false;
+		} else if (!level.equals(other.level))
+			return false;
 		if (password == null) {
 			if (other.password != null)
 				return false;
 		} else if (!password.equals(other.password))
-			return false;
-		if (userName == null) {
-			if (other.userName != null)
-				return false;
-		} else if (!userName.equals(other.userName))
 			return false;
 		return true;
 	}

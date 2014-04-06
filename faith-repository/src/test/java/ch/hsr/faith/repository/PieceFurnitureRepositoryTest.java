@@ -8,18 +8,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import ch.hsr.faith.domain.Furniture;
+import ch.hsr.faith.domain.PieceOfFurniture;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration({ "classpath*:META-INF/spring/repository-test-context.xml" })
-public class FurnitureRepositoryTest {
+public class PieceFurnitureRepositoryTest {
 
 	@Autowired
-	private FurnitureRepository furnitureRepository;
+	private PieceOfFurnitureRepository furnitureRepository;
 
 	@Test
 	public void testFurnitureCreate() {
-		Furniture furniture = new Furniture();
+		PieceOfFurniture furniture = new PieceOfFurniture();
 		furniture.setName("Bett");
 
 		furnitureRepository.save(furniture);
@@ -30,11 +30,11 @@ public class FurnitureRepositoryTest {
 	public void testFurnitureRead() {
 		String furnitureName = "MeinBett";
 
-		Furniture furniture = new Furniture();
+		PieceOfFurniture furniture = new PieceOfFurniture();
 		furniture.setName(furnitureName);
 
-		Furniture result = furnitureRepository.save(furniture);
-		Furniture read = furnitureRepository.findById(result.getId());
+		PieceOfFurniture result = furnitureRepository.save(furniture);
+		PieceOfFurniture read = furnitureRepository.findById(result.getId());
 		assertEquals(result.getName(), read.getName());
 	}
 
@@ -43,13 +43,13 @@ public class FurnitureRepositoryTest {
 		String furnitureNameInitial = "MeinBett";
 		String furnitureNameUpdated = "DeinBett";
 
-		Furniture furniture = new Furniture();
+		PieceOfFurniture furniture = new PieceOfFurniture();
 		furniture.setName(furnitureNameInitial);
 
-		Furniture result = furnitureRepository.save(furniture);
+		PieceOfFurniture result = furnitureRepository.save(furniture);
 		result.setName(furnitureNameUpdated);
 		result = furnitureRepository.save(furniture);
-		Furniture read = furnitureRepository.findById(result.getId());
+		PieceOfFurniture read = furnitureRepository.findById(result.getId());
 		
 		assertEquals(result.getName(), read.getName());
 	}
@@ -58,14 +58,14 @@ public class FurnitureRepositoryTest {
 	public void testFurnitureDelete() {
 		String furnitureNameInitial = "SeinBett";
 
-		Furniture furniture = new Furniture();
+		PieceOfFurniture furniture = new PieceOfFurniture();
 		furniture.setName(furnitureNameInitial);
 
-		Furniture result = furnitureRepository.save(furniture);
-		Furniture toRemove = new Furniture();
+		PieceOfFurniture result = furnitureRepository.save(furniture);
+		PieceOfFurniture toRemove = new PieceOfFurniture();
 		toRemove.setId(result.getId());
 		furnitureRepository.delete(toRemove);
-		Furniture read = furnitureRepository.findById(result.getId());
+		PieceOfFurniture read = furnitureRepository.findById(result.getId());
 		
 		assertEquals(read, null);
 	}

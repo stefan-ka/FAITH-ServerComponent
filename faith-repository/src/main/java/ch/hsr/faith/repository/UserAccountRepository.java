@@ -10,6 +10,6 @@ public interface UserAccountRepository {
 
 	public UserAccount findById(Long id);
 
-	public UserAccount findByUserName(String userName);
+	public UserAccount findByEmail(String email);
 
 }

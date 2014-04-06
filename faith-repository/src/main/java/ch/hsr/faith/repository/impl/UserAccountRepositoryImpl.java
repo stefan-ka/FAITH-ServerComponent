@@ -32,8 +32,8 @@ public class UserAccountRepositoryImpl implements UserAccountRepository {
 	}
 
 	@Override
-	public UserAccount findByUserName(String userName) {
-		List<UserAccount> userAccountList = jpaUserAccountRepository.findByUserName(userName);
+	public UserAccount findByEmail(String email) {
+		List<UserAccount> userAccountList = jpaUserAccountRepository.findByEmail(email);
 		if (userAccountList.size() > 0)
 			return userAccountList.get(0);
 		return null;

@@ -9,11 +9,11 @@ import ch.hsr.faith.repository.UserAccountRepository;
 public class UserAccountMockRepository extends AbstractMockRepository<UserAccount> implements UserAccountRepository {
 
 	@Override
-	public UserAccount findByUserName(String userName) {
-		if (userName == null)
+	public UserAccount findByEmail(String email) {
+		if (email == null)
 			return null;
 		for (UserAccount userAccount : objectMap.values()) {
-			if (userName.equals(userAccount.getUserName())) {
+			if (email.equals(userAccount.getEmail())) {
 				return userAccount;
 			}
 		}

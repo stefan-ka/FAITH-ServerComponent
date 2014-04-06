@@ -9,31 +9,31 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import ch.hsr.faith.application.rest.dto.BaseJSONResponse;
-import ch.hsr.faith.domain.Organization;
-import ch.hsr.faith.service.OrganizationService;
+import ch.hsr.faith.domain.Facility;
+import ch.hsr.faith.service.FacilityService;
 
 @Controller
-@RequestMapping("/organizations")
-public class OrganizationController extends AbstractController {
+@RequestMapping("/facilities")
+public class FacilityController extends AbstractController {
 
 	@Autowired
-	private OrganizationService organizationService;
+	private FacilityService facilityService;
 
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
 	@ResponseBody
 	public BaseJSONResponse getAllOrganizations(Model model) {
-		return createResponse(BaseJSONResponse.STATUS_SUCCESS, this.organizationService.findAll());
+		return createResponse(BaseJSONResponse.STATUS_SUCCESS, this.facilityService.findAll());
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST, consumes = "application/json")
 	@ResponseBody
-	public BaseJSONResponse addOrganisatzion(Model model, @RequestBody Organization organization) {
-		return createResponse(BaseJSONResponse.STATUS_SUCCESS, organizationService.add(organization));
+	public BaseJSONResponse addOrganisatzion(Model model, @RequestBody Facility organization) {
+		return createResponse(BaseJSONResponse.STATUS_SUCCESS, facilityService.add(organization));
 	}
 
 	@RequestMapping(value = "/first", method = RequestMethod.GET)
 	@ResponseBody
 	public BaseJSONResponse getFirstOrganization(Model model) {
-		return createResponse(BaseJSONResponse.STATUS_SUCCESS, this.organizationService.get(1l));
+		return createResponse(BaseJSONResponse.STATUS_SUCCESS, this.facilityService.get(1l));
 	}
 }

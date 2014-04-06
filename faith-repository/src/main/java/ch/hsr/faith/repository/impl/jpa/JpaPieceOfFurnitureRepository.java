@@ -4,9 +4,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
-import ch.hsr.faith.domain.Furniture;
+import ch.hsr.faith.domain.PieceOfFurniture;
 
 @Repository
-public interface JpaFurnitureRepository extends JpaRepository<Furniture, Long>, JpaSpecificationExecutor<Furniture> {
+public interface JpaPieceOfFurnitureRepository extends JpaRepository<PieceOfFurniture, Long>, JpaSpecificationExecutor<PieceOfFurniture> {
 
 }

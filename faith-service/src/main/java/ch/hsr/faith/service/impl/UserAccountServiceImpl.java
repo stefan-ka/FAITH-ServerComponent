@@ -24,7 +24,7 @@ public class UserAccountServiceImpl implements UserAccountService {
 
 	@Override
 	public UserAccount save(UserAccount userAccount) throws FAITHException {
-		if (userAccount.getPassword() != null && !	"".equals(userAccount.getPassword())) {
+		if (userAccount.getPassword() != null && !"".equals(userAccount.getPassword())) {
 			try {
 				userAccount.setPassword(PasswordEncryptor.encryptPassword(userAccount.getPassword()));
 			} catch (NoSuchAlgorithmException e) {
@@ -37,8 +37,8 @@ public class UserAccountServiceImpl implements UserAccountService {
 	}
 
 	@Override
-	public boolean doesUserNameAlreadyExist(String userName) {
-		UserAccount userAccount = userAccountRepository.findByUserName(userName);
+	public boolean doesEmailAlreadyExist(String email) {
+		UserAccount userAccount = userAccountRepository.findByEmail(email);
 		return userAccount != null;
 	}
 

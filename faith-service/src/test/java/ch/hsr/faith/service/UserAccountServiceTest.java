@@ -23,13 +23,12 @@ public class UserAccountServiceTest {
 	private UserAccountService userAccountService;
 
 	private UserAccount validUser;
-	private String existingUserName = "existingUserName";
-	private String nonExistingUserName = "nonExistingUserName";
+	private String existingEmail = "mail@faith.ch";
+	private String nonExistingEmail = "doesNotExist@faith.ch";
 
 	@Before
 	public void setUp() {
 		validUser = new UserAccount();
-		validUser.setUserName(existingUserName);
 		validUser.setPassword("pass123456");
 		validUser.setEmail("mail@faith.ch");
 	}
@@ -37,30 +36,25 @@ public class UserAccountServiceTest {
 	@Test
 	public void testRegisterUserAccount() throws FAITHException {
 		UserAccount userAccount = new UserAccount();
-		userAccount.setUserName("testuser");
 		userAccount.setPassword("pass123456");
 		userAccount.setEmail("mail@faith.ch");
-		
+
 		UserAccount persistentUserAccount = userAccountService.save(userAccount);
 		assertNotNull(persistentUserAccount);
 		assertNotNull(persistentUserAccount.getId());
 		assertTrue(persistentUserAccount.getId() > 0);
-		assertEquals("testuser", persistentUserAccount.getUserName());
 		assertEquals("mail@faith.ch", persistentUserAccount.getEmail());
-		assertEquals("9be40402f45736bcb9502225fad5ec9b",
-				persistentUserAccount.getPassword());
+		assertEquals("9be40402f45736bcb9502225fad5ec9b", persistentUserAccount.getPassword());
 	}
 
 	@Test
 	public void testDoesUserNameAlreadyExistWithExistingUser() throws FAITHException {
 		userAccountService.save(validUser);
-		assertTrue(userAccountService
-				.doesUserNameAlreadyExist(existingUserName));
+		assertTrue(userAccountService.doesEmailAlreadyExist(existingEmail));
 	}
 
 	@Test
 	public void testDoesUserNameAlreadyExistWithNonExistingUser() {
-		assertFalse(userAccountService
-				.doesUserNameAlreadyExist(nonExistingUserName));
+		assertFalse(userAccountService.doesEmailAlreadyExist(nonExistingEmail));
 	}
 }

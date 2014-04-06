@@ -8,19 +8,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import ch.hsr.faith.application.rest.dto.BaseJSONResponse;
-import ch.hsr.faith.service.FurnitureService;
+import ch.hsr.faith.service.PieceOfFurnitureService;
 
 @Controller
-@RequestMapping("/furnitures")
-public class FurnitureController extends AbstractController {
+@RequestMapping("/piece-of-furnitures")
+public class PieceOfFurnitureController extends AbstractController {
 
 	@Autowired
-	private FurnitureService furnitureService;
+	private PieceOfFurnitureService pieceOfFurnitureService;
 
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
 	@ResponseBody
 	public BaseJSONResponse getAllFurnitures(Model model) {
-		return createResponse(BaseJSONResponse.STATUS_SUCCESS, this.furnitureService.findAll());
+		return createResponse(BaseJSONResponse.STATUS_SUCCESS, this.pieceOfFurnitureService.findAll());
 	}
 
 }

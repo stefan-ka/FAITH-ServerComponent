@@ -10,7 +10,7 @@ import ch.hsr.faith.service.UserAccountService;
 
 @Component
 public class UserAccountValidator implements Validator {
-	
+
 	@Autowired
 	private UserAccountService userAccountService;
 
@@ -23,17 +23,14 @@ public class UserAccountValidator implements Validator {
 	public void validate(Object object, Errors errors) {
 		if (object instanceof UserAccount) {
 			UserAccount userAccount = (UserAccount) object;
-			if (userAccount.getUserName() == null || "".equals(userAccount.getUserName())) {
-				errors.rejectValue("userName", "emptyField.useraccount.username");
-			}
 			if (userAccount.getEmail() == null || "".equals(userAccount.getEmail())) {
 				errors.rejectValue("email", "emptyField.useraccount.email");
 			}
 			if (userAccount.getPassword() == null || "".equals(userAccount.getPassword())) {
 				errors.rejectValue("password", "emptyField.useraccount.password");
 			}
-			if(userAccountService.doesUserNameAlreadyExist(userAccount.getUserName())) {
-				errors.rejectValue("userName", "emptyField.useraccount.username.notunique");
+			if (userAccountService.doesEmailAlreadyExist(userAccount.getEmail())) {
+				errors.rejectValue("userName", "notunique.useraccount.email");
 			}
 		}
 	}
