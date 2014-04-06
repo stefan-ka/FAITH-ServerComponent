@@ -13,6 +13,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<faith-domain-version>1.0.1-SNAPSHOT</faith-domain-version>
 		<spring-version>4.0.2.RELEASE</spring-version>
 		<spring-data-version>1.4.4.RELEASE</spring-data-version>
 	</properties>
@@ -23,7 +24,7 @@
 			<dependency>
 				<groupId>ch.hsr.faith</groupId>
 				<artifactId>faith-domain</artifactId>
-				<version>0.0.5-SNAPSHOT</version>
+				<version>${faith-domain-version}</version>
 			</dependency>
 			<dependency>
 				<groupId>ch.hsr.faith</groupId>

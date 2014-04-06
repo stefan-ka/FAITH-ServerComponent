@@ -8,7 +8,6 @@
 
 	<modules>
 		<module>faith-parent</module>
-		<module>faith-domain</module>
 		<module>faith-repository</module>
 		<module>faith-service</module>
 		<module>faith-rest-application</module>
