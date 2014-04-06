@@ -30,17 +30,14 @@ public class FurnitureCategoryServiceTest {
 		furnitureCategoryR1.setName("Root1");
 		furnitureCategoryR2 = new FurnitureCategory();
 		furnitureCategoryR2.setName("Root2");
-		furnitureCategoryR1 = furnitureCategoryService
-				.create(furnitureCategoryR1);
-		furnitureCategoryR2 = furnitureCategoryService
-				.create(furnitureCategoryR2);
+		furnitureCategoryR1 = furnitureCategoryService.create(furnitureCategoryR1);
+		furnitureCategoryR2 = furnitureCategoryService.create(furnitureCategoryR2);
 
 	}
 
 	@Test
 	public void TestFindRootCategories() {
-		List<FurnitureCategory> rootCategories = furnitureCategoryService
-				.findRootCategories();
+		List<FurnitureCategory> rootCategories = furnitureCategoryService.findRootCategories();
 		assertEquals(2, rootCategories.size());
 	}
 
@@ -50,10 +47,9 @@ public class FurnitureCategoryServiceTest {
 		assertEquals(furnitureCategoryR1, foundById);
 	}
 
-	// TODO Change to FAITHException.class
-	@Test(expected = Exception.class)
+	@Test(expected = FAITHException.class)
 	public void TestFindNonExistingById() throws FAITHException {
-		FurnitureCategory foundById = furnitureCategoryService.findById(inexistendId);
+		furnitureCategoryService.findById(inexistendId);
 	}
 
 }

@@ -28,14 +28,11 @@ public class FurnitureCategoryServiceImpl implements FurnitureCategoryService {
 
 	@Override
 	public FurnitureCategory findById(Long id) throws FAITHException {
-		FurnitureCategory furnitureCategory = furnitureCategoryRepository
-				.findById(id);
-		if (furnitureCategory != null)
-			return furnitureCategory;
-		// TODO configure message
-		throw new FAITHException(messageSource.getMessage(
-				"message.id.no.furniturecategory", null,
-				LocaleContextHolder.getLocale()));
+		FurnitureCategory furnitureCategory = furnitureCategoryRepository.findById(id);
+		if (furnitureCategory == null)
+			throw new FAITHException(messageSource.getMessage("message.id.no.furniturecategory", null, LocaleContextHolder.getLocale()));
+
+		return furnitureCategory;
 	}
 
 	@Override

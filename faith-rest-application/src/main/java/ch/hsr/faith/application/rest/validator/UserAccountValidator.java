@@ -30,7 +30,7 @@ public class UserAccountValidator implements Validator {
 				errors.rejectValue("password", "emptyField.useraccount.password");
 			}
 			if (userAccountService.doesEmailAlreadyExist(userAccount.getEmail())) {
-				errors.rejectValue("userName", "notunique.useraccount.email");
+				errors.rejectValue("email", "notunique.useraccount.email");
 			}
 		}
 	}
