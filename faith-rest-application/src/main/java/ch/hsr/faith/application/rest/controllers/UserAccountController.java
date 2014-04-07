@@ -3,6 +3,8 @@ package ch.hsr.faith.application.rest.controllers;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
@@ -20,7 +22,7 @@ import ch.hsr.faith.service.UserAccountService;
 
 @Controller
 @RequestMapping("/useraccount")
-public class UserAccountController extends AbstractController {
+public class UserAccountController extends AbstractController  {
 
 	@Autowired
 	private UserAccountService userAccountService;
@@ -37,6 +39,13 @@ public class UserAccountController extends AbstractController {
 	@ResponseBody
 	public BaseJSONResponse registerUserAccount(Model model, @Valid @RequestBody UserAccount userAccount) throws FAITHException {
 		return createResponse(BaseJSONResponse.STATUS_SUCCESS, this.userAccountService.save(userAccount));
+	}
+
+	@RequestMapping(value = "/login", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
+	@ResponseBody
+	public BaseJSONResponse loginUserAccount(Model model, @RequestBody UserAccount userAccount) throws FAITHException {
+		// TODO: Not yet implemented
+		return null;
 	}
 
 }

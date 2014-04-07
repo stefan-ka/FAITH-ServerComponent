@@ -12,6 +12,7 @@
                                      http://www.springframework.org/schema/util/spring-util-4.0.xsd">
 
 	<import resource="repository-context.xml" />
+	<import resource="security-config.xml" />
 
 	<mvc:annotation-driven />
 
@@ -55,6 +56,11 @@
 				<value>translations</value>
 			</list>
 		</property>
+	</bean>
+
+
+	<bean id="faithAuthProvider"
+		class="ch.hsr.faith.application.rest.controllersch.hsr.faith.application.rest.controllers.UserAccountController">
 	</bean>
 
 	<mvc:interceptors>

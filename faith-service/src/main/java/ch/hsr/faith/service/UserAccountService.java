@@ -1,5 +1,7 @@
 package ch.hsr.faith.service;
 
+import org.springframework.security.access.annotation.Secured;
+
 import ch.hsr.faith.domain.UserAccount;
 import ch.hsr.faith.exception.FAITHException;
 
@@ -9,4 +11,8 @@ public interface UserAccountService {
 
 	public boolean doesEmailAlreadyExist(String email);
 
+	@Secured("ROLE_USER")
+	public String secureMehtod();
+	
+	public String nonSecureMethod();
 }

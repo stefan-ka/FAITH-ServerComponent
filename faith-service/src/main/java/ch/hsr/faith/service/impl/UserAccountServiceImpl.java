@@ -24,12 +24,16 @@ public class UserAccountServiceImpl implements UserAccountService {
 
 	@Override
 	public UserAccount save(UserAccount userAccount) throws FAITHException {
-		if (userAccount.getPassword() != null && !"".equals(userAccount.getPassword())) {
+		if (userAccount.getPassword() != null
+				&& !"".equals(userAccount.getPassword())) {
 			try {
-				userAccount.setPassword(PasswordEncryptor.encryptPassword(userAccount.getPassword()));
+				userAccount.setPassword(PasswordEncryptor
+						.encryptPassword(userAccount.getPassword()));
 			} catch (NoSuchAlgorithmException e) {
 				e.printStackTrace();
-				throw new FAITHException(messageSource.getMessage("message.err.password.encryption", null, LocaleContextHolder.getLocale()));
+				throw new FAITHException(messageSource.getMessage(
+						"message.err.password.encryption", null,
+						LocaleContextHolder.getLocale()));
 			}
 
 		}
@@ -40,6 +44,16 @@ public class UserAccountServiceImpl implements UserAccountService {
 	public boolean doesEmailAlreadyExist(String email) {
 		UserAccount userAccount = userAccountRepository.findByEmail(email);
 		return userAccount != null;
+	}
+
+	@Override
+	public String secureMehtod() {
+		return "You have access to a seucred service function";
+	}
+
+	@Override
+	public String nonSecureMethod() {
+		return "You have access to a non secured service function";
 	}
 
 }
