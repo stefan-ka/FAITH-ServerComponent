@@ -60,7 +60,7 @@
 
 
 	<bean id="faithAuthProvider"
-		class="ch.hsr.faith.application.rest.controllersch.hsr.faith.application.rest.controllers.UserAccountController">
+		class="ch.hsr.faith.application.rest.controllers.UserAccountController">
 	</bean>
 
 	<mvc:interceptors>
