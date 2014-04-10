@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import ch.hsr.faith.domain.FAITHLocale;
 import ch.hsr.faith.domain.PieceOfFurniture;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -24,10 +25,10 @@ public class PieceOfFurnitureServiceTest {
 	@Before
 	public void setUp() {
 		furniture1 = new PieceOfFurniture();
-		furniture1.setName("F1");
+		furniture1.getName().addText(FAITHLocale.GERMAN, "F1");
 		furniture1 = pieceOfFurnitureService.create(furniture1);
 		furniture2 = new PieceOfFurniture();
-		furniture2.setName("F2");
+		furniture2.getName().addText(FAITHLocale.GERMAN, "F2");
 		furniture2 = pieceOfFurnitureService.create(furniture2);
 
 	}

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import ch.hsr.faith.domain.FAITHLocale;
 import ch.hsr.faith.domain.PieceOfFurniture;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -20,7 +21,7 @@ public class PieceFurnitureRepositoryTest {
 	@Test
 	public void testFurnitureCreate() {
 		PieceOfFurniture furniture = new PieceOfFurniture();
-		furniture.setName("Bett");
+		furniture.getName().addText(FAITHLocale.GERMAN, "Bett");
 
 		furnitureRepository.save(furniture);
 		assertEquals(1, furnitureRepository.findAll().size());
@@ -28,10 +29,8 @@ public class PieceFurnitureRepositoryTest {
 
 	@Test
 	public void testFurnitureRead() {
-		String furnitureName = "MeinBett";
-
 		PieceOfFurniture furniture = new PieceOfFurniture();
-		furniture.setName(furnitureName);
+		furniture.getName().addText(FAITHLocale.GERMAN, "MeinBett");
 
 		PieceOfFurniture result = furnitureRepository.save(furniture);
 		PieceOfFurniture read = furnitureRepository.findById(result.getId());
@@ -44,31 +43,30 @@ public class PieceFurnitureRepositoryTest {
 		String furnitureNameUpdated = "DeinBett";
 
 		PieceOfFurniture furniture = new PieceOfFurniture();
-		furniture.setName(furnitureNameInitial);
+		furniture.getName().addText(FAITHLocale.GERMAN, furnitureNameInitial);
 
 		PieceOfFurniture result = furnitureRepository.save(furniture);
-		result.setName(furnitureNameUpdated);
+		result.getName().addText(FAITHLocale.GERMAN, furnitureNameUpdated);
 		result = furnitureRepository.save(furniture);
 		PieceOfFurniture read = furnitureRepository.findById(result.getId());
-		
+
 		assertEquals(result.getName(), read.getName());
 	}
-	
+
 	@Test
 	public void testFurnitureDelete() {
 		String furnitureNameInitial = "SeinBett";
 
 		PieceOfFurniture furniture = new PieceOfFurniture();
-		furniture.setName(furnitureNameInitial);
+		furniture.getName().addText(FAITHLocale.GERMAN, furnitureNameInitial);
 
 		PieceOfFurniture result = furnitureRepository.save(furniture);
 		PieceOfFurniture toRemove = new PieceOfFurniture();
 		toRemove.setId(result.getId());
 		furnitureRepository.delete(toRemove);
 		PieceOfFurniture read = furnitureRepository.findById(result.getId());
-		
+
 		assertEquals(read, null);
 	}
-
 
 }

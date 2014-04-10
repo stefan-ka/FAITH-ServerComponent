@@ -11,6 +11,7 @@
 		<mapping-file>jpa/ItemNeeded-orm.xml</mapping-file>
 		<mapping-file>jpa/PieceOfFurniture-orm.xml</mapping-file>
 		<mapping-file>jpa/UserAccount-orm.xml</mapping-file>
+		<mapping-file>jpa/MultilingualString-orm.xml</mapping-file>
 		<properties>
 			<property name="hibernate.show_sql" value="true" />
 			<property name="hibernate.ejb.naming_strategy" value="org.hibernate.cfg.ImprovedNamingStrategy" />

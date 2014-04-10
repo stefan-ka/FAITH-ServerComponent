@@ -13,6 +13,12 @@
 			<id name="id">
 				<generated-value strategy="SEQUENCE" />
 			</id>
+			<one-to-one name="name" orphan-removal="true">
+				<join-column name="name_string_id" />
+				<cascade>
+					<cascade-all />
+				</cascade>
+			</one-to-one>
 		</attributes>
 	</entity>
 </entity-mappings>

@@ -11,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import ch.hsr.faith.domain.FAITHLocale;
 import ch.hsr.faith.domain.FurnitureCategory;
+import ch.hsr.faith.domain.MultilingualString;
 import ch.hsr.faith.exception.FAITHException;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -27,9 +29,9 @@ public class FurnitureCategoryServiceTest {
 	@Before
 	public void setUp() {
 		furnitureCategoryR1 = new FurnitureCategory();
-		furnitureCategoryR1.setName("Root1");
+		furnitureCategoryR1.setName(new MultilingualString(FAITHLocale.GERMAN, "Root1"));
 		furnitureCategoryR2 = new FurnitureCategory();
-		furnitureCategoryR2.setName("Root2");
+		furnitureCategoryR2.setName(new MultilingualString(FAITHLocale.GERMAN, "Root2"));
 		furnitureCategoryR1 = furnitureCategoryService.create(furnitureCategoryR1);
 		furnitureCategoryR2 = furnitureCategoryService.create(furnitureCategoryR2);
 
