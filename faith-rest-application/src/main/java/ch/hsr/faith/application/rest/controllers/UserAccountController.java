@@ -39,11 +39,10 @@ public class UserAccountController extends AbstractController  {
 		return createResponse(BaseJSONResponse.STATUS_SUCCESS, this.userAccountService.save(userAccount));
 	}
 
-	@RequestMapping(value = "/login", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
+	@RequestMapping(value = "/login", method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
-	public BaseJSONResponse loginUserAccount(Model model, @RequestBody UserAccount userAccount) throws FAITHException {
-		// TODO: Not yet implemented
-		return null;
+	public BaseJSONResponse loginUserAccount(Model model) throws FAITHException {
+		return createResponse(BaseJSONResponse.STATUS_SUCCESS, "Client successfully logged in");
 	}
 
 }

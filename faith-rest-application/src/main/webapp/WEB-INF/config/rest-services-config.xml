@@ -58,11 +58,6 @@
 		</property>
 	</bean>
 
-
-	<bean id="faithAuthProvider"
-		class="ch.hsr.faith.application.rest.controllers.UserAccountController">
-	</bean>
-
 	<mvc:interceptors>
 		<bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor"
 			p:paramName="lang" />
