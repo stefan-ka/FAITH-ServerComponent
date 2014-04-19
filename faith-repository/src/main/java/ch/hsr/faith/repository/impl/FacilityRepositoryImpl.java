@@ -1,5 +1,6 @@
 package ch.hsr.faith.repository.impl;
 
+import java.util.Iterator;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -41,5 +42,17 @@ public class FacilityRepositoryImpl implements FacilityRepository {
 	public List<Facility> findAll() {
 		return jpaFacilityRepository.findAll();
 	}
-
+	
+	@Override
+	public Facility findByNameAndAddress(String name, String zip, String street) {
+		List<Facility> facilityList = jpaFacilityRepository.findByName(name);
+		for (Iterator<Facility> it = facilityList.iterator(); it.hasNext();) {
+			Facility facility = it.next();
+			if (facility.getZip().equals(zip) && facility.getStreet().equals(street))
+				it.remove();
+		}
+		if (facilityList.size() > 0)
+			return facilityList.get(0);
+		return null;
+	}
 }

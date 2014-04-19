@@ -47,8 +47,8 @@ public class UserAccountServiceImpl implements UserAccountService {
 	}
 
 	@Override
-	public String secureMehtod() {
-		return "You have access to a seucred service function";
+	public String secureMethod() {
+		return "You have access to a secured service function";
 	}
 
 	@Override
