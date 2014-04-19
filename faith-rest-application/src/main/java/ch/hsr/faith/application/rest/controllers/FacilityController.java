@@ -1,5 +1,7 @@
 package ch.hsr.faith.application.rest.controllers;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,7 +33,7 @@ public class FacilityController extends AbstractController {
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST, consumes = "application/json")
 	@ResponseBody
-	public BaseJSONResponse addFacility(Model model, @RequestBody Facility facility) {
+	public BaseJSONResponse addFacility(Model model, @Valid @RequestBody Facility facility) {
 		return createResponse(BaseJSONResponse.STATUS_SUCCESS, this.facilityService.add(facility));
 	}
 

@@ -21,8 +21,8 @@ public class FacilityServiceImpl implements FacilityService {
 	}
 
 	@Override
-	public Facility add(Facility item) {
-		return facilityRepository.save(item);
+	public Facility add(Facility facility) {
+		return facilityRepository.save(facility);
 	}
 
 	@Override
