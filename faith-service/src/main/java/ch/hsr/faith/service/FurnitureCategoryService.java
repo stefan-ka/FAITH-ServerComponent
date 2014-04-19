@@ -9,8 +9,10 @@ public interface FurnitureCategoryService {
 
 	public List<FurnitureCategory> findRootCategories();
 
+	public List<FurnitureCategory> findByParent(FurnitureCategory parentCategory);
+
 	public FurnitureCategory findById(Long id) throws FAITHException;
-	
+
 	public FurnitureCategory create(FurnitureCategory item);
 
 }

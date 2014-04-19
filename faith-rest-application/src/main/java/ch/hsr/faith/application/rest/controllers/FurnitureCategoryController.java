@@ -24,16 +24,23 @@ public class FurnitureCategoryController extends AbstractController {
 
 	@RequestMapping(value = "/all-roots", method = RequestMethod.GET)
 	@ResponseBody
-	public BaseJSONResponse getAllFurnitures(Model model) {
+	public BaseJSONResponse getAllRootCategories(Model model) {
 		List<FurnitureCategory> furnitureCategoryList = this.furnitureCategoryService.findRootCategories();
 		return createResponse(BaseJSONResponse.STATUS_SUCCESS, furnitureCategoryList);
 	}
 
-	@RequestMapping(value = "/get/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/findById/{id}", method = RequestMethod.GET)
 	@ResponseBody
-	public BaseJSONResponse editSmartphonePage(@PathVariable long id) throws FAITHException {
+	public BaseJSONResponse get(@PathVariable long id) throws FAITHException {
 		FurnitureCategory furnitureCategory = this.furnitureCategoryService.findById(id);
 		return createResponse(BaseJSONResponse.STATUS_SUCCESS, furnitureCategory);
+	}
+
+	@RequestMapping(value = "/findByParentId/{parentId}", method = RequestMethod.GET)
+	@ResponseBody
+	public BaseJSONResponse findByParent(@PathVariable long parentId) throws FAITHException {
+		FurnitureCategory parentCategory = furnitureCategoryService.findById(parentId);
+		return createResponse(BaseJSONResponse.STATUS_SUCCESS, this.furnitureCategoryService.findByParent(parentCategory));
 	}
 
 }

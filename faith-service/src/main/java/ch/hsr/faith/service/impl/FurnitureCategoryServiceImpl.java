@@ -40,4 +40,9 @@ public class FurnitureCategoryServiceImpl implements FurnitureCategoryService {
 		return furnitureCategoryRepository.save(item);
 	}
 
+	@Override
+	public List<FurnitureCategory> findByParent(FurnitureCategory parentCategory) {
+		return furnitureCategoryRepository.findByParentCategory(parentCategory);
+	}
+
 }
