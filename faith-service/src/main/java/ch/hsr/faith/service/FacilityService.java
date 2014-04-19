@@ -8,8 +8,10 @@ public interface FacilityService {
 
 	public List<Facility> findAll();
 	
-	public Facility add(Facility item);
+	public Facility add(Facility facility);
 	
 	public Facility get(Long id);
+	
+	public boolean doesFacilityAlreadyExist(String name, String zip, String street);
 
 }

@@ -12,7 +12,7 @@ public interface UserAccountService {
 	public boolean doesEmailAlreadyExist(String email);
 
 	@Secured("ROLE_USER")
-	public String secureMehtod();
+	public String secureMethod();
 	
 	public String nonSecureMethod();
 }

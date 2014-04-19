@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import ch.hsr.faith.application.rest.dto.BaseJSONResponse;
+import ch.hsr.faith.application.rest.validator.FacilityValidator;
 import ch.hsr.faith.domain.Facility;
 import ch.hsr.faith.service.FacilityService;
 
@@ -19,6 +20,9 @@ public class FacilityController extends AbstractController {
 	@Autowired
 	private FacilityService facilityService;
 
+	@Autowired
+	private FacilityValidator facilityValidator;
+
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
 	@ResponseBody
 	public BaseJSONResponse getAllOrganizations(Model model) {
@@ -27,8 +31,8 @@ public class FacilityController extends AbstractController {
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST, consumes = "application/json")
 	@ResponseBody
-	public BaseJSONResponse addOrganisatzion(Model model, @RequestBody Facility organization) {
-		return createResponse(BaseJSONResponse.STATUS_SUCCESS, facilityService.add(organization));
+	public BaseJSONResponse addFacility(Model model, @RequestBody Facility facility) {
+		return createResponse(BaseJSONResponse.STATUS_SUCCESS, this.facilityService.add(facility));
 	}
 
 	@RequestMapping(value = "/first", method = RequestMethod.GET)

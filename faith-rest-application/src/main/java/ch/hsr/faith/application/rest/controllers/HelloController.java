@@ -29,7 +29,7 @@ public class HelloController extends AbstractController {
 	@ResponseBody
 	public BaseJSONResponse showSecuredMethod(Model model) {
 		BaseJSONResponse message = new BaseJSONResponse(BaseJSONResponse.STATUS_SUCCESS);
-		message.setData(userAccountService.secureMehtod());
+		message.setData(userAccountService.secureMethod());
 		return message;
 	}
 	

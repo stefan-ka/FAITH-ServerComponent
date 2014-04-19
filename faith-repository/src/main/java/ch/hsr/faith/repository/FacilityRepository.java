@@ -14,5 +14,7 @@ public interface FacilityRepository {
 	public Facility findById(Long id);
 
 	public List<Facility> findAll();
+	
+	public Facility findByNameAndAddress(String name, String zip, String street);
 
 }
