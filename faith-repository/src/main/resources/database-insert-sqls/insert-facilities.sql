@@ -1,5 +1,5 @@
 -- ------ insert FACILITIES -------
--- Einfuegen: Owner für alle Einrichtungen
+-- Einfuegen: Dummy Owner für alle Einrichtungen
 delete from user_account where email='all@facilities.owner';
 insert into user_account (id, email, password) values (nextval('hibernate_sequence'), 'all@facilities.owner', '1234');
 	
@@ -19,7 +19,7 @@ insert into facility (id, city, country, email, gps_latitude, gps_longitude, hom
 insert into facility (id, city, country, email, gps_latitude, gps_longitude, homepage, level, name, phone, street, zip, facility_category, user_account) 
  values (nextval('hibernate_sequence'), 'Romanshorn', 'Schweiz', 'info@hpz-romanshorn.ch', null, null, 'www.hpz-romanshorn.ch', 1, 'Heilpädagogisches Zentrum Romanshorn', '071 463 27 35', 'Schulstrasse 16', '8590', (select fcat.id from facility_category fcat, multilingual_string mstr, multilingual_string_map msmap where fcat.name_string_id = mstr.string_id and msmap.string_id = fcat.name_string_id and msmap.locale_code = 'de' and msmap.text = 'Behindertenheim'), (select uact.id from user_account uact where uact.email = 'all@facilities.owner'));
 
--- Einfuegen: Jugendheim
+-- Einfuegen: Jugendheime
 insert into facility (id, city, country, email, gps_latitude, gps_longitude, homepage, level, name, phone, street, zip, facility_category, user_account) 
  values (nextval('hibernate_sequence'), 'Mendrisio', 'Schweiz', 'luisa.piatti@comfamiliare.org', null, null, 'www.pictor.comfamiliare.ore', 2, 'Foyer Casa di Pictor', '091/646 59 31', 'Via Turconi 20', '6850', (select fcat.id from facility_category fcat, multilingual_string mstr, multilingual_string_map msmap where fcat.name_string_id = mstr.string_id and msmap.string_id = fcat.name_string_id and msmap.locale_code = 'de' and msmap.text = 'Jugendheim'), (select uact.id from user_account uact where uact.email = 'all@facilities.owner'));
 insert into facility (id, city, country, email, gps_latitude, gps_longitude, homepage, level, name, phone, street, zip, facility_category, user_account) 
@@ -31,7 +31,7 @@ insert into facility (id, city, country, email, gps_latitude, gps_longitude, hom
 insert into facility (id, city, country, email, gps_latitude, gps_longitude, homepage, level, name, phone, street, zip, facility_category, user_account) 
  values (nextval('hibernate_sequence'), 'Seon', 'Schweiz', 'aufnahmeheim@bluewin.ch', null, null, 'www.aufnahmeheim.ch', 2, 'Aufnahmeheim Seon', '062 797 75 88', 'Seetalstrasse 4', '5703', (select fcat.id from facility_category fcat, multilingual_string mstr, multilingual_string_map msmap where fcat.name_string_id = mstr.string_id and msmap.string_id = fcat.name_string_id and msmap.locale_code = 'de' and msmap.text = 'Jugendheim'), (select uact.id from user_account uact where uact.email = 'all@facilities.owner'));
 
--- Einfuegen: Kinderheim
+-- Einfuegen: Kinderheime
 insert into facility (id, city, country, email, gps_latitude, gps_longitude, homepage, level, name, phone, street, zip, facility_category, user_account) 
  values (nextval('hibernate_sequence'), 'Brugg', 'Schweiz', 'info@kinderheimbrugg.ch', null, null, 'www.kinderheimbrugg.ch', 2, 'Kinderheim Brugg', '056 448 90 20', 'Wildenrainweg 8', '5201', (select fcat.id from facility_category fcat, multilingual_string mstr, multilingual_string_map msmap where fcat.name_string_id = mstr.string_id and msmap.string_id = fcat.name_string_id and msmap.locale_code = 'de' and msmap.text = 'Kinderheim'), (select uact.id from user_account uact where uact.email = 'all@facilities.owner'));
 insert into facility (id, city, country, email, gps_latitude, gps_longitude, homepage, level, name, phone, street, zip, facility_category, user_account) 
@@ -41,7 +41,7 @@ insert into facility (id, city, country, email, gps_latitude, gps_longitude, hom
 insert into facility (id, city, country, email, gps_latitude, gps_longitude, homepage, level, name, phone, street, zip, facility_category, user_account) 
  values (nextval('hibernate_sequence'), 'Münsingen', 'Schweiz', 'sonnhalde@swi.salvationarmy.org', null, null, 'www.heilsarmee.ch/sonnhalde', 2, 'Kinderheim Sonnhalde', '031/ 721 08 06', 'Standweg 7', '3110', (select fcat.id from facility_category fcat, multilingual_string mstr, multilingual_string_map msmap where fcat.name_string_id = mstr.string_id and msmap.string_id = fcat.name_string_id and msmap.locale_code = 'de' and msmap.text = 'Kinderheim'), (select uact.id from user_account uact where uact.email = 'all@facilities.owner'));
 
--- Einfuegen: Obdachlosenhaus
+-- Einfuegen: Obdachlosenhäuser
 insert into facility (id, city, country, email, gps_latitude, gps_longitude, homepage, level, name, phone, street, zip, facility_category, user_account) 
  values (nextval('hibernate_sequence'), 'Zürich', 'Schweiz', null, null, null, null, 3, 'Katholisches Obdachlosenheim', '044 271 63 39', 'Konradstrasse 79', '8005', (select fcat.id from facility_category fcat, multilingual_string mstr, multilingual_string_map msmap where fcat.name_string_id = mstr.string_id and msmap.string_id = fcat.name_string_id and msmap.locale_code = 'de' and msmap.text = 'Obdachlosenhaus'), (select uact.id from user_account uact where uact.email = 'all@facilities.owner'));
 insert into facility (id, city, country, email, gps_latitude, gps_longitude, homepage, level, name, phone, street, zip, facility_category, user_account) 
@@ -63,7 +63,7 @@ insert into facility (id, city, country, email, gps_latitude, gps_longitude, hom
 insert into facility (id, city, country, email, gps_latitude, gps_longitude, homepage, level, name, phone, street, zip, facility_category, user_account) 
  values (nextval('hibernate_sequence'), 'Thônex', 'Schweiz', 'crmt@argos.ch', null, null, 'www.argos.ch', 1, 'ARGOS - CRMT (HO)', '022 869 18 80', 'Chemin Du Bois-des-Arts 38', '1226', (select fcat.id from facility_category fcat, multilingual_string mstr, multilingual_string_map msmap where fcat.name_string_id = mstr.string_id and msmap.string_id = fcat.name_string_id and msmap.locale_code = 'de' and msmap.text = 'Therapie und Rehabilitation'), (select uact.id from user_account uact where uact.email = 'all@facilities.owner'));
 
--- Einfuegen: Waisenhaus
+-- Einfuegen: Waisenhäuser
 insert into facility (id, city, country, email, gps_latitude, gps_longitude, homepage, level, name, phone, street, zip, facility_category, user_account) 
  values (nextval('hibernate_sequence'), 'Felsberg', 'Schweiz', 'spp.fornerod@gotthilft.ch', null, null, 'www.spp-verbund.ch', 3, 'Sozialpädagogische Pflegefamilie Fornerod', '081 252 35 21', 'Untere Gasse 56', '7012', (select fcat.id from facility_category fcat, multilingual_string mstr, multilingual_string_map msmap where fcat.name_string_id = mstr.string_id and msmap.string_id = fcat.name_string_id and msmap.locale_code = 'de' and msmap.text = 'Waisenhaus'), (select uact.id from user_account uact where uact.email = 'all@facilities.owner'));
 insert into facility (id, city, country, email, gps_latitude, gps_longitude, homepage, level, name, phone, street, zip, facility_category, user_account) 
