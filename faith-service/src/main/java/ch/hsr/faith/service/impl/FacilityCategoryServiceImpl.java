@@ -20,4 +20,9 @@ public class FacilityCategoryServiceImpl implements FacilityCategoryService {
 		return facilityCategoryRepository.findAll();
 	}
 
+	@Override
+	public FacilityCategory findById(Long id) {
+		return facilityCategoryRepository.findById(id);
+	}
+
 }

@@ -8,4 +8,6 @@ public interface FacilityCategoryService {
 
 	public List<FacilityCategory> findAll();
 
+	public FacilityCategory findById(Long id);
+
 }

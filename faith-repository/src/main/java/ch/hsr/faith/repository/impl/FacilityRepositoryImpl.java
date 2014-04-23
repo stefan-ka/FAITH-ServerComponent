@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import ch.hsr.faith.domain.Facility;
+import ch.hsr.faith.domain.FacilityCategory;
 import ch.hsr.faith.repository.FacilityRepository;
 import ch.hsr.faith.repository.impl.jpa.JpaFacilityRepository;
 
@@ -21,7 +22,7 @@ public class FacilityRepositoryImpl implements FacilityRepository {
 
 	@PersistenceContext
 	private EntityManager entityManager;
-	
+
 	@Override
 	public Facility save(Facility item) {
 		return jpaFacilityRepository.saveAndFlush(item);
@@ -42,7 +43,7 @@ public class FacilityRepositoryImpl implements FacilityRepository {
 	public List<Facility> findAll() {
 		return jpaFacilityRepository.findAll();
 	}
-	
+
 	@Override
 	public Facility findByNameAndAddress(String name, String zip, String street) {
 		List<Facility> facilityList = jpaFacilityRepository.findByName(name);
@@ -54,5 +55,10 @@ public class FacilityRepositoryImpl implements FacilityRepository {
 		if (facilityList.size() > 0)
 			return facilityList.get(0);
 		return null;
+	}
+
+	@Override
+	public List<Facility> findByCategory(FacilityCategory facilityCategory) {
+		return jpaFacilityRepository.findByFacilityCategory(facilityCategory);
 	}
 }
