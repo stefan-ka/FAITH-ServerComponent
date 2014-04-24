@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import ch.hsr.faith.domain.Facility;
 import ch.hsr.faith.domain.UserAccount;
+import ch.hsr.faith.domain.FacilityCategory;
 import ch.hsr.faith.repository.FacilityRepository;
 import ch.hsr.faith.service.FacilityService;
 
@@ -40,5 +41,10 @@ public class FacilityServiceImpl implements FacilityService {
 	public boolean doesFacilityAlreadyExist(String name, String zip, String street) {
 		Facility facility = facilityRepository.findByNameAndAddress(name, zip, street);
 		return facility != null;
+	}
+
+	@Override
+	public List<Facility> findByCategory(FacilityCategory facilityCategory) {
+		return facilityRepository.findByCategory(facilityCategory);
 	}
 }

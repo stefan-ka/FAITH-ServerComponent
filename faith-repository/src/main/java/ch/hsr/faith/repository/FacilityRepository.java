@@ -4,6 +4,7 @@ import java.util.List;
 
 import ch.hsr.faith.domain.Facility;
 import ch.hsr.faith.domain.UserAccount;
+import ch.hsr.faith.domain.FacilityCategory;
 
 
 public interface FacilityRepository {
@@ -17,6 +18,8 @@ public interface FacilityRepository {
 	public List<Facility> findAll();
 
 	public List<Facility> findByUserAccount(UserAccount userAccount);
+	
+	public List<Facility> findByCategory(FacilityCategory facilityCategory);
 	
 	public Facility findByNameAndAddress(String name, String zip, String street);
 

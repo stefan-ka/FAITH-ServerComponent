@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import ch.hsr.faith.domain.Facility;
 import ch.hsr.faith.domain.UserAccount;
+import ch.hsr.faith.domain.FacilityCategory;
 import ch.hsr.faith.repository.FacilityRepository;
 import ch.hsr.faith.repository.impl.jpa.JpaFacilityRepository;
 
@@ -22,7 +23,7 @@ public class FacilityRepositoryImpl implements FacilityRepository {
 
 	@PersistenceContext
 	private EntityManager entityManager;
-	
+
 	@Override
 	public Facility save(Facility item) {
 		return jpaFacilityRepository.saveAndFlush(item);
@@ -43,7 +44,7 @@ public class FacilityRepositoryImpl implements FacilityRepository {
 	public List<Facility> findAll() {
 		return jpaFacilityRepository.findAll();
 	}
-	
+
 	@Override
 	public Facility findByNameAndAddress(String name, String zip, String street) {
 		List<Facility> facilityList = jpaFacilityRepository.findByName(name);
@@ -60,5 +61,10 @@ public class FacilityRepositoryImpl implements FacilityRepository {
 	@Override
 	public List<Facility> findByUserAccount(UserAccount userAccount) {
 		return jpaFacilityRepository.findByUserAccount(userAccount);
+	}
+	
+	@Override
+	public List<Facility> findByCategory(FacilityCategory facilityCategory) {
+		return jpaFacilityRepository.findByFacilityCategory(facilityCategory);
 	}
 }

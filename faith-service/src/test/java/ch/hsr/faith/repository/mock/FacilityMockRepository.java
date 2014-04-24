@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import ch.hsr.faith.domain.Facility;
-import ch.hsr.faith.domain.PieceOfFurniture;
+import ch.hsr.faith.domain.FacilityCategory;
 import ch.hsr.faith.domain.UserAccount;
 import ch.hsr.faith.repository.FacilityRepository;
 
@@ -31,6 +31,19 @@ public class FacilityMockRepository extends AbstractMockRepository<Facility> imp
 		for (Facility facility : objectMap.values()) {
 			if (userAccount != null && userAccount.equals(facility.getUserAccount())) {
 				resultList.add(facility);
+			}
+		}
+		return resultList;
+	}
+
+	@Override
+	public List<Facility> findByCategory(FacilityCategory facilityCategory) {
+		List<Facility> resultList = new ArrayList<Facility>();
+		if (facilityCategory != null) {
+			for (Facility facility : objectMap.values()) {
+				if (facilityCategory.equals(facility.getFacilityCategory())) {
+					resultList.add(facility);
+				}
 			}
 		}
 		return resultList;

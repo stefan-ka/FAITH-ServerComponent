@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import ch.hsr.faith.application.rest.dto.BaseJSONResponse;
 import ch.hsr.faith.application.rest.validator.FacilityValidator;
 import ch.hsr.faith.domain.Facility;
+import ch.hsr.faith.domain.FacilityCategory;
 import ch.hsr.faith.domain.UserAccount;
 import ch.hsr.faith.exception.FAITHException;
+import ch.hsr.faith.service.FacilityCategoryService;
 import ch.hsr.faith.service.FacilityService;
 import ch.hsr.faith.service.UserAccountService;
 
@@ -28,6 +30,9 @@ public class FacilityController extends AbstractController {
 	
 	@Autowired
 	private UserAccountService userAccountService;
+
+	@Autowired
+	private FacilityCategoryService facilityCategoryService;
 
 	@Autowired
 	private FacilityValidator facilityValidator;
@@ -55,5 +60,12 @@ public class FacilityController extends AbstractController {
 	@ResponseBody
 	public BaseJSONResponse getFirstOrganization(Model model) {
 		return createResponse(BaseJSONResponse.STATUS_SUCCESS, this.facilityService.get(1l));
+	}
+
+	@RequestMapping(value = "/findByCategoryId/{categoryId}", method = RequestMethod.GET)
+	@ResponseBody
+	public BaseJSONResponse getCategoryId(@PathVariable long categoryId) throws FAITHException {
+		FacilityCategory facilityCategory = facilityCategoryService.findById(categoryId);
+		return createResponse(BaseJSONResponse.STATUS_SUCCESS, facilityService.findByCategory(facilityCategory));
 	}
 }
