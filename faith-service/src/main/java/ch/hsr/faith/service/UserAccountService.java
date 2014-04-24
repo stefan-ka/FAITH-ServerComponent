@@ -10,6 +10,8 @@ public interface UserAccountService {
 	public UserAccount save(UserAccount userAccount) throws FAITHException;
 
 	public boolean doesEmailAlreadyExist(String email);
+	
+	public UserAccount findById(Long id) throws FAITHException;
 
 	@Secured("ROLE_USER")
 	public String secureMethod();

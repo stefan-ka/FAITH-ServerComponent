@@ -45,6 +45,15 @@ public class UserAccountServiceImpl implements UserAccountService {
 		UserAccount userAccount = userAccountRepository.findByEmail(email);
 		return userAccount != null;
 	}
+	
+	@Override
+	public UserAccount findById(Long id) throws FAITHException {
+		UserAccount userAccount = userAccountRepository.findById(id);
+		if (userAccount == null)
+			throw new FAITHException(messageSource.getMessage("message.id.no.furniturecategory", null, LocaleContextHolder.getLocale()));
+
+		return userAccount;
+	}
 
 	@Override
 	public String secureMethod() {

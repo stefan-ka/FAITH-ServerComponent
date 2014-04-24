@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import ch.hsr.faith.domain.Facility;
+import ch.hsr.faith.domain.UserAccount;
 import ch.hsr.faith.repository.FacilityRepository;
 import ch.hsr.faith.repository.impl.jpa.JpaFacilityRepository;
 
@@ -48,11 +49,16 @@ public class FacilityRepositoryImpl implements FacilityRepository {
 		List<Facility> facilityList = jpaFacilityRepository.findByName(name);
 		for (Iterator<Facility> it = facilityList.iterator(); it.hasNext();) {
 			Facility facility = it.next();
-			if (facility.getZip().equals(zip) && facility.getStreet().equals(street))
+			if (!(facility.getZip().equals(zip) && facility.getStreet().equals(street)))
 				it.remove();
 		}
 		if (facilityList.size() > 0)
 			return facilityList.get(0);
 		return null;
+	}
+
+	@Override
+	public List<Facility> findByUserAccount(UserAccount userAccount) {
+		return jpaFacilityRepository.findByUserAccount(userAccount);
 	}
 }

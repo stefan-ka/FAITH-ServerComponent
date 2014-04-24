@@ -5,6 +5,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -13,7 +14,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import ch.hsr.faith.application.rest.dto.BaseJSONResponse;
 import ch.hsr.faith.application.rest.validator.FacilityValidator;
 import ch.hsr.faith.domain.Facility;
+import ch.hsr.faith.domain.UserAccount;
+import ch.hsr.faith.exception.FAITHException;
 import ch.hsr.faith.service.FacilityService;
+import ch.hsr.faith.service.UserAccountService;
 
 @Controller
 @RequestMapping("/facilities")
@@ -21,6 +25,9 @@ public class FacilityController extends AbstractController {
 
 	@Autowired
 	private FacilityService facilityService;
+	
+	@Autowired
+	private UserAccountService userAccountService;
 
 	@Autowired
 	private FacilityValidator facilityValidator;
@@ -35,6 +42,13 @@ public class FacilityController extends AbstractController {
 	@ResponseBody
 	public BaseJSONResponse addFacility(Model model, @Valid @RequestBody Facility facility) {
 		return createResponse(BaseJSONResponse.STATUS_SUCCESS, this.facilityService.add(facility));
+	}
+	
+	@RequestMapping(value = "/findByUserAccountId/{userId}", method = RequestMethod.GET)
+	@ResponseBody
+	public BaseJSONResponse getUserAccountId(@PathVariable long userId) throws FAITHException {
+		UserAccount userAccount = userAccountService.findById(userId);
+		return createResponse(BaseJSONResponse.STATUS_SUCCESS, facilityService.findByUserAccount(userAccount));
 	}
 
 	@RequestMapping(value = "/first", method = RequestMethod.GET)
