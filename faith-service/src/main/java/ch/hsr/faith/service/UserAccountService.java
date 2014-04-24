@@ -12,6 +12,8 @@ public interface UserAccountService {
 	public boolean doesEmailAlreadyExist(String email);
 	
 	public UserAccount findById(Long id) throws FAITHException;
+	
+	public UserAccount findByEmail(String email) throws FAITHException;
 
 	@Secured("ROLE_USER")
 	public String secureMethod();

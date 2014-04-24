@@ -48,13 +48,6 @@ public class FacilityController extends AbstractController {
 	public BaseJSONResponse addFacility(Model model, @Valid @RequestBody Facility facility) {
 		return createResponse(BaseJSONResponse.STATUS_SUCCESS, this.facilityService.add(facility));
 	}
-	
-	@RequestMapping(value = "/findByUserAccountId/{userId}", method = RequestMethod.GET)
-	@ResponseBody
-	public BaseJSONResponse getUserAccountId(@PathVariable long userId) throws FAITHException {
-		UserAccount userAccount = userAccountService.findById(userId);
-		return createResponse(BaseJSONResponse.STATUS_SUCCESS, facilityService.findByUserAccount(userAccount));
-	}
 
 	@RequestMapping(value = "/first", method = RequestMethod.GET)
 	@ResponseBody
@@ -67,5 +60,12 @@ public class FacilityController extends AbstractController {
 	public BaseJSONResponse getCategoryId(@PathVariable long categoryId) throws FAITHException {
 		FacilityCategory facilityCategory = facilityCategoryService.findById(categoryId);
 		return createResponse(BaseJSONResponse.STATUS_SUCCESS, facilityService.findByCategory(facilityCategory));
+	}
+	
+	@RequestMapping(value = "/findByUserAccountId/{userId}", method = RequestMethod.GET)
+	@ResponseBody
+	public BaseJSONResponse getUserAccountId(@PathVariable long userId) throws FAITHException {
+		UserAccount userAccount = userAccountService.findById(userId);
+		return createResponse(BaseJSONResponse.STATUS_SUCCESS, facilityService.findByUserAccount(userAccount));
 	}
 }

@@ -50,7 +50,16 @@ public class UserAccountServiceImpl implements UserAccountService {
 	public UserAccount findById(Long id) throws FAITHException {
 		UserAccount userAccount = userAccountRepository.findById(id);
 		if (userAccount == null)
-			throw new FAITHException(messageSource.getMessage("message.id.no.furniturecategory", null, LocaleContextHolder.getLocale()));
+			throw new FAITHException(messageSource.getMessage("message.id.no.useraccount", null, LocaleContextHolder.getLocale()));
+
+		return userAccount;
+	}
+	
+	@Override
+	public UserAccount findByEmail(String email) throws FAITHException {
+		UserAccount userAccount = userAccountRepository.findByEmail(email);
+		if (userAccount == null)
+			throw new FAITHException(messageSource.getMessage("message.id.no.useraccount.email", null, LocaleContextHolder.getLocale()));
 
 		return userAccount;
 	}
