@@ -44,5 +44,4 @@ public class UserAccountController extends AbstractController  {
 	public BaseJSONResponse loginUserAccount(Model model) throws FAITHException {
 		return createResponse(BaseJSONResponse.STATUS_SUCCESS, "Client successfully logged in");
 	}
-
 }

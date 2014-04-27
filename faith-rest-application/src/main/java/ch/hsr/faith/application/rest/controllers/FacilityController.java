@@ -3,6 +3,7 @@ package ch.hsr.faith.application.rest.controllers;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -39,7 +40,7 @@ public class FacilityController extends AbstractController {
 
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
 	@ResponseBody
-	public BaseJSONResponse getAllOrganizations(Model model) {
+	public BaseJSONResponse getAllFacilities(Model model) {
 		return createResponse(BaseJSONResponse.STATUS_SUCCESS, this.facilityService.findAll());
 	}
 
@@ -51,7 +52,7 @@ public class FacilityController extends AbstractController {
 
 	@RequestMapping(value = "/first", method = RequestMethod.GET)
 	@ResponseBody
-	public BaseJSONResponse getFirstOrganization(Model model) {
+	public BaseJSONResponse getFirstFacility(Model model) {
 		return createResponse(BaseJSONResponse.STATUS_SUCCESS, this.facilityService.get(1l));
 	}
 
@@ -62,10 +63,11 @@ public class FacilityController extends AbstractController {
 		return createResponse(BaseJSONResponse.STATUS_SUCCESS, facilityService.findByCategory(facilityCategory));
 	}
 	
-	@RequestMapping(value = "/findByUserAccountId/{userId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/findUsersFacilities", method = RequestMethod.GET)
 	@ResponseBody
-	public BaseJSONResponse getUserAccountId(@PathVariable long userId) throws FAITHException {
-		UserAccount userAccount = userAccountService.findById(userId);
+	@Secured("ROLE_USER")
+	public BaseJSONResponse getUserAccountId() throws FAITHException {
+		UserAccount userAccount = new UserAccount();
 		return createResponse(BaseJSONResponse.STATUS_SUCCESS, facilityService.findByUserAccount(userAccount));
 	}
 }

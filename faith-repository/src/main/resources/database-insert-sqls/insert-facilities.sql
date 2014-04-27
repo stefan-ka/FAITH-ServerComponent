@@ -1,7 +1,7 @@
 -- ------ insert FACILITIES -------
 -- Einfuegen: Dummy Owner für alle Einrichtungen
 delete from user_account where email='all@facilities.owner';
-insert into user_account (id, email, password) values (nextval('hibernate_sequence'), 'all@facilities.owner', '1234');
+insert into user_account (id, email, password) values (nextval('hibernate_sequence'), 'all@facilities.owner', md5('1234'));
 	
 -- Einfuegen: Behindertenheime
 insert into facility (id, city, country, email, gps_latitude, gps_longitude, homepage, level, name, phone, street, zip, facility_category, user_account) 
