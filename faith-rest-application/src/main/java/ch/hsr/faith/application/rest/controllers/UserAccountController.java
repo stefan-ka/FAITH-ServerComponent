@@ -2,6 +2,7 @@ package ch.hsr.faith.application.rest.controllers;
 
 import javax.validation.Valid;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,13 +21,15 @@ import ch.hsr.faith.service.UserAccountService;
 
 @Controller
 @RequestMapping("/useraccount")
-public class UserAccountController extends AbstractController  {
+public class UserAccountController extends AbstractController {
 
 	@Autowired
 	private UserAccountService userAccountService;
 
 	@Autowired
 	private UserAccountValidator userAccountValidator;
+
+	Logger logger = Logger.getRootLogger();
 
 	@InitBinder
 	protected void initBinder(WebDataBinder binder) {
@@ -42,6 +45,10 @@ public class UserAccountController extends AbstractController  {
 	@RequestMapping(value = "/login", method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
 	public BaseJSONResponse loginUserAccount(Model model) throws FAITHException {
+		UserAccount userAccount = getLoggedInUser();
+		if (userAccount != null) {
+			logger.info("User '" + userAccount.getEmail() + "' successfully logged in.");
+		}
 		return createResponse(BaseJSONResponse.STATUS_SUCCESS, "Client successfully logged in");
 	}
 
