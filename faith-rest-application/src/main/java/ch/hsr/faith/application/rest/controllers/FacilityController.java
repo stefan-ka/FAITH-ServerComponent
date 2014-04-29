@@ -2,6 +2,7 @@ package ch.hsr.faith.application.rest.controllers;
 
 import javax.validation.Valid;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
@@ -16,7 +17,6 @@ import ch.hsr.faith.application.rest.dto.BaseJSONResponse;
 import ch.hsr.faith.application.rest.validator.FacilityValidator;
 import ch.hsr.faith.domain.Facility;
 import ch.hsr.faith.domain.FacilityCategory;
-import ch.hsr.faith.domain.UserAccount;
 import ch.hsr.faith.exception.FAITHException;
 import ch.hsr.faith.service.FacilityCategoryService;
 import ch.hsr.faith.service.FacilityService;
@@ -25,6 +25,7 @@ import ch.hsr.faith.service.UserAccountService;
 @Controller
 @RequestMapping("/facilities")
 public class FacilityController extends AbstractController {
+	Logger logger = Logger.getRootLogger();
 
 	@Autowired
 	private FacilityService facilityService;
@@ -66,8 +67,7 @@ public class FacilityController extends AbstractController {
 	@RequestMapping(value = "/findUsersFacilities", method = RequestMethod.GET)
 	@ResponseBody
 	@Secured("ROLE_USER")
-	public BaseJSONResponse getUserAccountId() throws FAITHException {
-		UserAccount userAccount = new UserAccount();
-		return createResponse(BaseJSONResponse.STATUS_SUCCESS, facilityService.findByUserAccount(userAccount));
+	public BaseJSONResponse getLoggedInUsersFacilities() throws FAITHException {
+		return createResponse(BaseJSONResponse.STATUS_SUCCESS, facilityService.findByUserAccount(getLoggedInUser()));
 	}
 }
