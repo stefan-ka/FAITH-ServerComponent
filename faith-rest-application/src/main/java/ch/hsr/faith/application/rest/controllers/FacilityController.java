@@ -68,4 +68,10 @@ public class FacilityController extends AbstractController {
 		UserAccount userAccount = userAccountService.findById(userId);
 		return createResponse(BaseJSONResponse.STATUS_SUCCESS, facilityService.findByUserAccount(userAccount));
 	}
+	
+	@RequestMapping(value = "/allWithDistanceFrom/{longitude}/{latitude}", method = RequestMethod.GET)
+	@ResponseBody
+	public BaseJSONResponse allWithDistanceFrom(@PathVariable double longitude, @PathVariable double latitude) {
+		return createResponse(BaseJSONResponse.STATUS_SUCCESS, this.facilityService.fetchDistance(this.facilityService.findAll(), longitude, latitude));
+	}
 }
