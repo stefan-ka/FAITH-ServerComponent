@@ -2,7 +2,9 @@ package ch.hsr.faith.application.rest.controllers;
 
 import javax.validation.Valid;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,7 +17,6 @@ import ch.hsr.faith.application.rest.dto.BaseJSONResponse;
 import ch.hsr.faith.application.rest.validator.FacilityValidator;
 import ch.hsr.faith.domain.Facility;
 import ch.hsr.faith.domain.FacilityCategory;
-import ch.hsr.faith.domain.UserAccount;
 import ch.hsr.faith.exception.FAITHException;
 import ch.hsr.faith.service.FacilityCategoryService;
 import ch.hsr.faith.service.FacilityService;
@@ -24,6 +25,7 @@ import ch.hsr.faith.service.UserAccountService;
 @Controller
 @RequestMapping("/facilities")
 public class FacilityController extends AbstractController {
+	Logger logger = Logger.getRootLogger();
 
 	@Autowired
 	private FacilityService facilityService;
@@ -39,7 +41,7 @@ public class FacilityController extends AbstractController {
 
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
 	@ResponseBody
-	public BaseJSONResponse getAllOrganizations(Model model) {
+	public BaseJSONResponse getAllFacilities(Model model) {
 		return createResponse(BaseJSONResponse.STATUS_SUCCESS, this.facilityService.findAll());
 	}
 
@@ -51,7 +53,7 @@ public class FacilityController extends AbstractController {
 
 	@RequestMapping(value = "/first", method = RequestMethod.GET)
 	@ResponseBody
-	public BaseJSONResponse getFirstOrganization(Model model) {
+	public BaseJSONResponse getFirstFacility(Model model) {
 		return createResponse(BaseJSONResponse.STATUS_SUCCESS, this.facilityService.get(1l));
 	}
 
@@ -62,11 +64,11 @@ public class FacilityController extends AbstractController {
 		return createResponse(BaseJSONResponse.STATUS_SUCCESS, facilityService.findByCategory(facilityCategory));
 	}
 	
-	@RequestMapping(value = "/findByUserAccountId/{userId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/findUsersFacilities", method = RequestMethod.GET)
 	@ResponseBody
-	public BaseJSONResponse getUserAccountId(@PathVariable long userId) throws FAITHException {
-		UserAccount userAccount = userAccountService.findById(userId);
-		return createResponse(BaseJSONResponse.STATUS_SUCCESS, facilityService.findByUserAccount(userAccount));
+	@Secured("ROLE_USER")
+	public BaseJSONResponse getLoggedInUsersFacilities() throws FAITHException {
+		return createResponse(BaseJSONResponse.STATUS_SUCCESS, facilityService.findByUserAccount(getLoggedInUser()));
 	}
 	
 	@RequestMapping(value = "/allWithDistanceFrom/{longitude}/{latitude}", method = RequestMethod.GET)

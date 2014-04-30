@@ -1,11 +1,14 @@
 -- ------ insert FACILITIES -------
--- Einfuegen: Dummy Owner für alle Einrichtungen
+-- Einfuegen: Dummy Owner für alle (bis auf eine) Einrichtungen
 delete from user_account where email='all@facilities.owner';
-insert into user_account (id, email, password) values (nextval('hibernate_sequence'), 'all@facilities.owner', '1234');
+insert into user_account (id, email, password) values (nextval('hibernate_sequence'), 'all@facilities.owner', md5('1234'));
+-- Einfuegen: Dummy Owner für eine Einrichtung
+delete from user_account where email='one@facility.owner';
+insert into user_account (id, email, password) values (nextval('hibernate_sequence'), 'one@facility.owner', md5('1234'));
 	
 -- Einfuegen: Behindertenheime
 insert into facility (id, city, country, email, gps_latitude, gps_longitude, homepage, level, name, phone, street, zip, facility_category, user_account) 
- values (nextval('hibernate_sequence'), 'Münchenstein', 'Schweiz', 'leitung.wg.m-stein@bluewin.ch', null, null, null, 1, 'Wohngruppen für Behinderte Kinder', '061 411 46 11', 'Zollweidenstrasse 13', '4142', (select fcat.id from facility_category fcat, multilingual_string mstr, multilingual_string_map msmap where fcat.name_string_id = mstr.string_id and msmap.string_id = fcat.name_string_id and msmap.locale_code = 'de' and msmap.text = 'Behindertenheim'), (select uact.id from user_account uact where uact.email = 'all@facilities.owner'));
+ values (nextval('hibernate_sequence'), 'Münchenstein', 'Schweiz', 'leitung.wg.m-stein@bluewin.ch', null, null, null, 1, 'Wohngruppen für Behinderte Kinder', '061 411 46 11', 'Zollweidenstrasse 13', '4142', (select fcat.id from facility_category fcat, multilingual_string mstr, multilingual_string_map msmap where fcat.name_string_id = mstr.string_id and msmap.string_id = fcat.name_string_id and msmap.locale_code = 'de' and msmap.text = 'Behindertenheim'), (select uact.id from user_account uact where uact.email = 'one@facility.owner'));
 insert into facility (id, city, country, email, gps_latitude, gps_longitude, homepage, level, name, phone, street, zip, facility_category, user_account) 
  values (nextval('hibernate_sequence'), 'Chur', 'Schweiz', 'sekretariat.thf@kjpd.gr.ch', null, null, 'http://www.kjpd-gr.ch/deutsch/therapiehaus/index.php', 1, 'Therapiehaus Fürstenwald', '081 353 10 64', 'Waisenhausstrasse 1', '7000', (select fcat.id from facility_category fcat, multilingual_string mstr, multilingual_string_map msmap where fcat.name_string_id = mstr.string_id and msmap.string_id = fcat.name_string_id and msmap.locale_code = 'de' and msmap.text = 'Behindertenheim'), (select uact.id from user_account uact where uact.email = 'all@facilities.owner'));
 insert into facility (id, city, country, email, gps_latitude, gps_longitude, homepage, level, name, phone, street, zip, facility_category, user_account) 

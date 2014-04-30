@@ -51,5 +51,4 @@ public class UserAccountController extends AbstractController {
 		}
 		return createResponse(BaseJSONResponse.STATUS_SUCCESS, "Client successfully logged in");
 	}
-
 }
