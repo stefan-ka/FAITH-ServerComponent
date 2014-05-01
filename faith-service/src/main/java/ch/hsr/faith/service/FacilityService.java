@@ -21,5 +21,5 @@ public interface FacilityService {
 
 	public List<Facility> findByCategory(FacilityCategory facilityCategory);
 
-	public List<FacilityWithDistance> fetchDistance(List<Facility> facilities, double originLongitude, double originLatitude);
+	public List<FacilityWithDistance> fetchDistance(List<Facility> facilities, double originLatitude, double originLongitude);
 }

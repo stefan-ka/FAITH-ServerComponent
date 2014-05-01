@@ -1,5 +1,7 @@
 package ch.hsr.faith.application.rest.controllers;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.apache.log4j.Logger;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import ch.hsr.faith.application.rest.dto.BaseJSONResponse;
@@ -29,7 +32,7 @@ public class FacilityController extends AbstractController {
 
 	@Autowired
 	private FacilityService facilityService;
-	
+
 	@Autowired
 	private UserAccountService userAccountService;
 
@@ -59,18 +62,20 @@ public class FacilityController extends AbstractController {
 
 	@RequestMapping(value = "/findByCategoryId/{categoryId}", method = RequestMethod.GET)
 	@ResponseBody
-	public BaseJSONResponse getCategoryId(@PathVariable long categoryId) throws FAITHException {
+	public BaseJSONResponse getCategoryId(@PathVariable long categoryId, @RequestParam(value = "latitude") double latitude, @RequestParam(value = "longitude") double longitude)
+			throws FAITHException {
 		FacilityCategory facilityCategory = facilityCategoryService.findById(categoryId);
-		return createResponse(BaseJSONResponse.STATUS_SUCCESS, facilityService.findByCategory(facilityCategory));
+		List<Facility> facilityList = facilityService.findByCategory(facilityCategory);
+		return createResponse(BaseJSONResponse.STATUS_SUCCESS, facilityService.fetchDistance(facilityList, latitude, longitude));
 	}
-	
+
 	@RequestMapping(value = "/findUsersFacilities", method = RequestMethod.GET)
 	@ResponseBody
 	@Secured("ROLE_USER")
 	public BaseJSONResponse getLoggedInUsersFacilities() throws FAITHException {
 		return createResponse(BaseJSONResponse.STATUS_SUCCESS, facilityService.findByUserAccount(getLoggedInUser()));
 	}
-	
+
 	@RequestMapping(value = "/allWithDistanceFrom/{longitude}/{latitude}", method = RequestMethod.GET)
 	@ResponseBody
 	public BaseJSONResponse allWithDistanceFrom(@PathVariable double longitude, @PathVariable double latitude) {
