@@ -50,6 +50,7 @@ public class FacilityController extends AbstractController {
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST, consumes = "application/json")
 	@ResponseBody
+	@Secured("ROLE_USER")
 	public BaseJSONResponse addFacility(Model model, @Valid @RequestBody Facility facility) {
 		return createResponse(BaseJSONResponse.STATUS_SUCCESS, this.facilityService.add(facility));
 	}
