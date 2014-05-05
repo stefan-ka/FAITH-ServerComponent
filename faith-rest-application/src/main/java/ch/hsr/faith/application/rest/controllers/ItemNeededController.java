@@ -45,7 +45,7 @@ public class ItemNeededController extends AbstractController {
 	@RequestMapping(value = "/add", method = RequestMethod.POST, consumes = "application/json")
 	@ResponseBody
 	@Secured("ROLE_USER")
-	public BaseJSONResponse addFacility(Model model, @Valid @RequestBody ItemNeeded itemNeeded) {
+	public BaseJSONResponse addItemNeeded(Model model, @Valid @RequestBody ItemNeeded itemNeeded) {
 		return createResponse(BaseJSONResponse.STATUS_SUCCESS, this.itemNeededService.create(itemNeeded));
 	}
 
