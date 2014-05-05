@@ -9,8 +9,10 @@ public interface ItemNeededService {
 
 	public List<ItemNeeded> findAll();
 
-	public ItemNeeded create(ItemNeeded item);
+	public ItemNeeded save(ItemNeeded item);
 
 	public List<ItemNeeded> findByFacility(Facility facility);
+
+	public void delete(Long itemNeededId);
 
 }

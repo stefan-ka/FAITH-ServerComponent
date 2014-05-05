@@ -22,13 +22,19 @@ public class ItemNeededServiceImpl implements ItemNeededService {
 	}
 
 	@Override
-	public ItemNeeded create(ItemNeeded item) {
+	public ItemNeeded save(ItemNeeded item) {
 		return itemNeededRepository.save(item);
 	}
 
 	@Override
 	public List<ItemNeeded> findByFacility(Facility facility) {
 		return itemNeededRepository.findByFacility(facility);
+	}
+
+	@Override
+	public void delete(Long itemNeededId) {
+		ItemNeeded itemNeeded = itemNeededRepository.findById(itemNeededId);
+		itemNeededRepository.delete(itemNeeded);
 	}
 
 }

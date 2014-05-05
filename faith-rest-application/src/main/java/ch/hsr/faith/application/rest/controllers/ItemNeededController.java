@@ -3,6 +3,8 @@ package ch.hsr.faith.application.rest.controllers;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,6 +31,9 @@ public class ItemNeededController extends AbstractController {
 	@Autowired
 	private FacilityService facilityService;
 
+	@Autowired
+	private MessageSource messageSource;
+
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
 	@ResponseBody
 	public BaseJSONResponse getAllFurnitures(Model model) {
@@ -46,7 +51,14 @@ public class ItemNeededController extends AbstractController {
 	@ResponseBody
 	@Secured("ROLE_USER")
 	public BaseJSONResponse addItemNeeded(Model model, @Valid @RequestBody ItemNeeded itemNeeded) {
-		return createResponse(BaseJSONResponse.STATUS_SUCCESS, this.itemNeededService.create(itemNeeded));
+		return createResponse(BaseJSONResponse.STATUS_SUCCESS, this.itemNeededService.save(itemNeeded));
+	}
+
+	@RequestMapping(value = "/delete/{itemNeededId}", method = RequestMethod.GET)
+	@ResponseBody
+	public BaseJSONResponse delete(@PathVariable long itemNeededId) throws FAITHException {
+		itemNeededService.delete(itemNeededId);
+		return createResponse(BaseJSONResponse.STATUS_SUCCESS, messageSource.getMessage("message.item.needed.delete.successfull", null, LocaleContextHolder.getLocale()));
 	}
 
 }
