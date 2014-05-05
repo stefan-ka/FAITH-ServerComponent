@@ -47,10 +47,10 @@ public class ItemNeededController extends AbstractController {
 		return createResponse(BaseJSONResponse.STATUS_SUCCESS, itemNeededService.findByFacility(facility));
 	}
 
-	@RequestMapping(value = "/add", method = RequestMethod.POST, consumes = "application/json")
+	@RequestMapping(value = "/save", method = RequestMethod.POST, consumes = "application/json")
 	@ResponseBody
 	@Secured("ROLE_USER")
-	public BaseJSONResponse addItemNeeded(Model model, @Valid @RequestBody ItemNeeded itemNeeded) {
+	public BaseJSONResponse saveItemNeeded(Model model, @Valid @RequestBody ItemNeeded itemNeeded) {
 		return createResponse(BaseJSONResponse.STATUS_SUCCESS, this.itemNeededService.save(itemNeeded));
 	}
 
