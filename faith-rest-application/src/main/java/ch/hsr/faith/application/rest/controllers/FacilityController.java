@@ -77,7 +77,7 @@ public class FacilityController extends AbstractController {
 		return createResponse(BaseJSONResponse.STATUS_SUCCESS, facilityService.findByUserAccount(getLoggedInUser()));
 	}
 
-	@RequestMapping(value = "/findByPieceOfFurnitureNeededWithDistanceFrom/{pieceOfItemId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/findByPieceOfFurnitureNeededWithDistanceFrom/{pieceOfFurnitureId}", method = RequestMethod.GET)
 	@ResponseBody
 	public BaseJSONResponse findByPieceOfFurnitureNeededWithDistanceFrom(@PathVariable long pieceOfFurnitureId, @RequestParam(value = "latitude") double latitude,
 			@RequestParam(value = "longitude") double longitude) {
