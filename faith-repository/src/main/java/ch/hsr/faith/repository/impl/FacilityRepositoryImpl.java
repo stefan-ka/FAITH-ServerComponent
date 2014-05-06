@@ -62,9 +62,14 @@ public class FacilityRepositoryImpl implements FacilityRepository {
 	public List<Facility> findByUserAccount(UserAccount userAccount) {
 		return jpaFacilityRepository.findByUserAccount(userAccount);
 	}
-	
+
 	@Override
 	public List<Facility> findByCategory(FacilityCategory facilityCategory) {
 		return jpaFacilityRepository.findByFacilityCategory(facilityCategory);
+	}
+
+	@Override
+	public List<Facility> findByPieceOfFurnitureNeededId(Long pieceOfFurnitureId) {
+		return jpaFacilityRepository.findByPieceOfFurnitureNeededId(pieceOfFurnitureId);
 	}
 }

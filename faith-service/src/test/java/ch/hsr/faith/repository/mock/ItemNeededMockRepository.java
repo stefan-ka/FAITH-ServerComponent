@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import ch.hsr.faith.domain.Facility;
 import ch.hsr.faith.domain.ItemNeeded;
+import ch.hsr.faith.domain.PieceOfFurniture;
 import ch.hsr.faith.repository.ItemNeededRepository;
 
 @Repository
@@ -17,6 +18,17 @@ public class ItemNeededMockRepository extends AbstractMockRepository<ItemNeeded>
 		List<ItemNeeded> resultList = new ArrayList<ItemNeeded>();
 		for (ItemNeeded itemNeeded : objectMap.values()) {
 			if (facility != null && facility.equals(itemNeeded.getFacility())) {
+				resultList.add(itemNeeded);
+			}
+		}
+		return resultList;
+	}
+
+	@Override
+	public List<ItemNeeded> findByPieceOfFurniture(PieceOfFurniture pieceOfFurniture) {
+		List<ItemNeeded> resultList = new ArrayList<ItemNeeded>();
+		for (ItemNeeded itemNeeded : objectMap.values()) {
+			if (pieceOfFurniture != null && pieceOfFurniture.equals(itemNeeded.getPieceOfFurniture())) {
 				resultList.add(itemNeeded);
 			}
 		}

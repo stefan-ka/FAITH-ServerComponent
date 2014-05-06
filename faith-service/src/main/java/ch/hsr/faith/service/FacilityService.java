@@ -22,4 +22,7 @@ public interface FacilityService {
 	public List<Facility> findByCategory(FacilityCategory facilityCategory);
 
 	public List<FacilityWithDistance> fetchDistance(List<Facility> facilities, double originLatitude, double originLongitude);
+
+	public List<Facility> findByPieceOfFurnitureNeededId(Long pieceOfFurnitureId);
+
 }

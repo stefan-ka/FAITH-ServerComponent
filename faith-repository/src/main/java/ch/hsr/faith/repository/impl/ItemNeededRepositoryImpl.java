@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import ch.hsr.faith.domain.Facility;
 import ch.hsr.faith.domain.ItemNeeded;
+import ch.hsr.faith.domain.PieceOfFurniture;
 import ch.hsr.faith.repository.ItemNeededRepository;
 import ch.hsr.faith.repository.impl.jpa.JpaItemNeededRepository;
 
@@ -46,6 +47,11 @@ public class ItemNeededRepositoryImpl implements ItemNeededRepository {
 	@Override
 	public List<ItemNeeded> findByFacility(Facility facility) {
 		return jpaItemNeededRepository.findByFacility(facility);
+	}
+
+	@Override
+	public List<ItemNeeded> findByPieceOfFurniture(PieceOfFurniture pieceOfFurniture) {
+		return jpaItemNeededRepository.findByPieceOfFurniture(pieceOfFurniture);
 	}
 
 }

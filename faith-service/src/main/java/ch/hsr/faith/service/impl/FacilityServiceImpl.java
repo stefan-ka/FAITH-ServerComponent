@@ -78,6 +78,11 @@ public class FacilityServiceImpl implements FacilityService {
 		return sortedList;
 	}
 
+	@Override
+	public List<Facility> findByPieceOfFurnitureNeededId(Long pieceOfFurnitureId) {
+		return facilityRepository.findByPieceOfFurnitureNeededId(pieceOfFurnitureId);
+	}
+
 }
 
 class DistanceCaller extends Thread {

@@ -4,6 +4,7 @@ import java.util.List;
 
 import ch.hsr.faith.domain.Facility;
 import ch.hsr.faith.domain.ItemNeeded;
+import ch.hsr.faith.domain.PieceOfFurniture;
 
 public interface ItemNeededRepository {
 
@@ -16,5 +17,7 @@ public interface ItemNeededRepository {
 	public List<ItemNeeded> findAll();
 
 	public List<ItemNeeded> findByFacility(Facility facility);
+	
+	public List<ItemNeeded> findByPieceOfFurniture(PieceOfFurniture pieceOfFurniture);
 
 }
