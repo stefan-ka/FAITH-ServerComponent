@@ -18,39 +18,53 @@ public class Coordinates {
 	private static String outputFormat = "json";
 	private static String encoding = "UTF-8";
 
-	public static void fetchGPSCoordinates(Facility facility) { 
+	public static void fetchGPSCoordinates(Facility facility) {
 		String address = getLocationString(facility);
 		URL apiURL = getApiUrl(address);
-		
+
 		JSONObject location;
-		
+
 		try {
 			location = getJSONResponse(apiURL);
 		} catch (IOException e) {
 			Logger.getRootLogger().error("Unable to talk Google API");
 			return;
 		}
-		facility.setGpsLatitude(extractLocationLatitude(location));
-		facility.setGpsLongitude(extractLocationLongitude(location));
+		if (wasRequestSuccessful(location)) {
+			facility.setGpsLatitude(extractLocationLatitude(location));
+			facility.setGpsLongitude(extractLocationLongitude(location));
+		}
 	}
-	
+
+	private static boolean wasRequestSuccessful(JSONObject jsonrResponse) {
+		String status = jsonrResponse.getString("status");
+		return status.equals("OK");
+	}
+
 	private static Float extractLocationLongitude(JSONObject location) {
 		double longitude = location.getJSONArray("results").getJSONObject(0).getJSONObject("geometry").getJSONObject("location").getDouble("lng");
 		Logger.getRootLogger().debug("Longitude: " + longitude);
-		return (float)longitude;
+		return (float) longitude;
 	}
+
 	private static Float extractLocationLatitude(JSONObject location) {
 		double latitude = location.getJSONArray("results").getJSONObject(0).getJSONObject("geometry").getJSONObject("location").getDouble("lat");
 		Logger.getRootLogger().debug("Latitude: " + latitude);
-		return (float)latitude;
+		return (float) latitude;
 	}
 
 	private static String getLocationString(Facility facility) {
-		String result;
+		String result = "";
 		try {
-		result = URLEncoder.encode(facility.getStreet(), encoding);
-		result += "+" + URLEncoder.encode(facility.getCity(), encoding);
-		result += "+" + URLEncoder.encode(facility.getCountry(), encoding);
+			if (facility.getStreet() != null) {
+				result += URLEncoder.encode(facility.getStreet(), encoding);
+			}
+			if (facility.getCity() != null) {
+				result += "+" + URLEncoder.encode(facility.getCity(), encoding);
+			}
+			if (facility.getCountry() != null) {
+				result += "+" + URLEncoder.encode(facility.getCountry(), encoding);
+			}
 		} catch (UnsupportedEncodingException e) {
 			Logger.getRootLogger().error("Selected Encoding is wrong");
 			throw new RuntimeException("Selected Encoding is wrong");
