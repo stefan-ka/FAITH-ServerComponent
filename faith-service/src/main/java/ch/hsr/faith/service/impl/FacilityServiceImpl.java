@@ -57,26 +57,8 @@ public class FacilityServiceImpl implements FacilityService {
 
 	@Override
 	public List<FacilityWithDistance> fetchDistance(List<Facility> facilities, double originLatitude, double originLongitude) {
-
-		List<FacilityWithDistance> sortedList = new ArrayList<>();
-		List<Thread> distanceCalls = new LinkedList<>();
-
-		for (Facility facility : facilities) {
-			Thread distanceCall = new DistanceCaller(originLatitude, originLongitude, facility, sortedList);
-			distanceCall.start();
-			distanceCalls.add(distanceCall);
-		}
-
-		for (Thread t : distanceCalls) {
-			try {
-				t.join();
-			} catch (InterruptedException e) {
-				Logger.getRootLogger().error("Distance call was interrupted");
-			}
-		}
-
-		Collections.sort(sortedList);
-		return sortedList;
+		return new Distances(originLatitude, originLongitude).addDistanceToFaciliies(facilities);
+	
 	}
 
 	@Override
@@ -90,23 +72,4 @@ public class FacilityServiceImpl implements FacilityService {
 		return add(facility);
 	}
 
-}
-
-class DistanceCaller extends Thread {
-	private double originLongitude, originLatitude;
-	private Facility facility;
-	List<FacilityWithDistance> target;
-
-	public DistanceCaller(double originLatitude, double originLongitude, Facility facility, List<FacilityWithDistance> target) {
-		this.originLatitude = originLatitude;
-		this.originLongitude = originLongitude;
-		this.facility = facility;
-		this.target = target;
-	}
-
-	@Override
-	public void run() {
-		int distance = Distances.getDistanceInKm(originLatitude, originLongitude, facility);
-		target.add(new FacilityWithDistance(facility, distance));
-	}
 }

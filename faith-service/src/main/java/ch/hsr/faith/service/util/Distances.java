@@ -1,91 +1,66 @@
 package ch.hsr.faith.service.util;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
-import java.net.URL;
-import java.net.URLConnection;
-import java.net.URLEncoder;
-
-import org.apache.log4j.Logger;
-import org.json.JSONObject;
-import org.json.JSONException;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
 
 import ch.hsr.faith.domain.Facility;
+import ch.hsr.faith.domain.FacilityWithDistance;
 
-public class Distances {
-	private static String apiurl = "https://maps.googleapis.com/maps/api/distancematrix/";
-	private static String outputFormat = "json";
-	private static String encoding = "UTF-8";
+public class Distances extends GoogleAPIRequest {
+	private final static String apiName = "distancematrix";
+	private double longitude, latitude;
 
-	public static Integer getDistanceInKm(double originLatitude, double originLongitude, Facility destinationFacility) {
-		String destination = getLocationString(destinationFacility);
-		String origin = getLocationString(originLatitude, originLongitude);
-		URL apiURL = getApiUrl(origin, destination);
-		JSONObject distance;
-		int distanceInMetres;
-		try {
-			distance = getJSONResponse(apiURL);
-			distanceInMetres = extractDistanceInMetres(distance);
-		} catch (IOException | JSONException e) {
-			Logger.getRootLogger().error("unable to fetch distance for a single facility");
-			return 0;
+	public Distances(double latitude, double longitude) {
+		super(apiName);
+		this.longitude = longitude;
+		this.latitude = latitude;
+	}
+
+	public List<FacilityWithDistance> addDistanceToFaciliies(List<Facility> source) {
+		addParameter("origins", this.latitude + "," + longitude);
+		addDestinations(source);
+		addParameter("sensor", "false");
+
+		execute();
+
+		if (isSucceded()) {
+			List<FacilityWithDistance> result = extract(source);
+			Collections.sort(result);
+			return result;
+		} else {
+			return fillDistanceWithZero(source);
 		}
-		return distanceInMetres/1000;
+
 	}
 
-	private static String getLocationString(Double originLatitude, Double originLongitude) {
-		return originLatitude.toString() + "," + originLongitude;
-	}
-
-	private static String getLocationString(Facility facility) {
-		String result;
-		try {
-		result = URLEncoder.encode(facility.getStreet(), encoding);
-		result += "+" + URLEncoder.encode(facility.getCity(), encoding);
-		result += "+" + URLEncoder.encode(facility.getCountry(), encoding);
-		} catch (UnsupportedEncodingException e) {
-			Logger.getRootLogger().error("Selected Encoding is wrong");
-			throw new RuntimeException("Selected Encoding is wrong");
+	private List<FacilityWithDistance> fillDistanceWithZero(List<Facility> source) {
+		LinkedList<FacilityWithDistance> result = new LinkedList<>();
+		for (Facility f : source) {
+			result.add(new FacilityWithDistance(f, 0));
 		}
 		return result;
 	}
 
-	private static Integer extractDistanceInMetres(JSONObject distance) {
-		int dist= distance.getJSONArray("rows").getJSONObject(0).getJSONArray("elements").getJSONObject(0).getJSONObject("distance").getInt("value");
-		Logger.getRootLogger().debug(dist);
-		return dist;
+	private List<FacilityWithDistance> extract(List<Facility> source) {
+		LinkedList<FacilityWithDistance> result = new LinkedList<>();
+		for (int i = 0; i < source.size(); i++) {
+			Integer distanceInMetres = getResponse().getJSONArray("rows").getJSONObject(0).getJSONArray("elements").getJSONObject(i).getJSONObject("distance").getInt("value");
+			Integer distanceInKm = distanceInMetres/1000;
+			result.add(new FacilityWithDistance(source.get(i), distanceInKm));
+		}
+		return result;
 	}
 
-	private static JSONObject getJSONResponse(URL apiURL) throws IOException {
-		URLConnection connection = apiURL.openConnection();
-
-		String line;
-		StringBuilder builder = new StringBuilder();
-		BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-		while ((line = reader.readLine()) != null) {
-			builder.append(line);
+	private void addDestinations(List<Facility> source) {
+		LinkedList<String> params = new LinkedList<>();
+		for (Facility f : source) {
+			params.add(getGPSParam(f));
 		}
-
-		return new JSONObject(builder.toString());
+		addParameterList("destinations", params, "|");
 	}
 
-	private static URL getApiUrl(String origin, String destination) {
-		String params = "origins=" + origin + "&";
-		params += "destinations=" + destination + "&";
-		params += "sensor=false";
-		URL url;
-
-		try {
-			url = new URL(apiurl + outputFormat + "?" + params);
-			Logger.getRootLogger().debug("Calling URL: " + url);
-			return url;
-		} catch (Exception e) {
-			Logger logger = Logger.getRootLogger();
-			logger.error("Invalid locations for distance calculation");
-			return null;
-		}
-
+	private String getGPSParam(Facility f) {
+		return f.getGpsLatitude() + "," + f.getGpsLongitude();
 	}
 }
