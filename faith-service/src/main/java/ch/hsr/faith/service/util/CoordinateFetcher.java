@@ -20,7 +20,7 @@ public class CoordinateFetcher extends GoogleAPIRequest {
 		address.add(facility.getCity());
 		address.add(facility.getCountry());
 
-		addParameterList("address", address);
+		addParameterList("address", address, "+");
 		addParameter("sensor", "false");
 
 		execute();

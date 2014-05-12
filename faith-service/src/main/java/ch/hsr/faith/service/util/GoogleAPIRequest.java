@@ -88,7 +88,7 @@ public class GoogleAPIRequest {
 
 	}
 	
-	protected void addParameterList(String key, List<String> paramList) { 
+	protected void addParameterList(String key, List<String> paramList, String separator) { 
 		
 		if(!parameter.isEmpty()) { 
 			parameter += "&";
@@ -97,9 +97,9 @@ public class GoogleAPIRequest {
 			parameter += key + "=";
 			for(String param : paramList) { 
 				parameter += URLEncoder.encode(param, URLEncoding);;
-				parameter += "+";
+				parameter += separator;
 			}
-			parameter = parameter.substring(0, parameter.length()-2);
+			parameter = parameter.substring(0, parameter.length()-separator.length());
 			
 		} catch (UnsupportedEncodingException e) {
 			log.error("Encoding not supported");
