@@ -4,14 +4,16 @@ import java.util.List;
 
 import ch.hsr.faith.domain.Facility;
 import ch.hsr.faith.domain.FacilityCategory;
-import ch.hsr.faith.domain.UserAccount;
 import ch.hsr.faith.domain.FacilityWithDistance;
+import ch.hsr.faith.domain.UserAccount;
 
 public interface FacilityService {
 
 	public List<Facility> findAll();
 
 	public Facility add(Facility facility);
+
+	public Facility addAndFetchCoordinates(Facility facility);
 
 	public Facility get(Long id);
 

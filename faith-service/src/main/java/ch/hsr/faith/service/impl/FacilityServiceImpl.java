@@ -15,7 +15,7 @@ import ch.hsr.faith.domain.FacilityWithDistance;
 import ch.hsr.faith.domain.UserAccount;
 import ch.hsr.faith.repository.FacilityRepository;
 import ch.hsr.faith.service.FacilityService;
-import ch.hsr.faith.service.util.Coordinates;
+import ch.hsr.faith.service.util.CoordinateFetcher;
 import ch.hsr.faith.service.util.Distances;
 
 @Service
@@ -31,7 +31,6 @@ public class FacilityServiceImpl implements FacilityService {
 
 	@Override
 	public Facility add(Facility facility) {
-		Coordinates.fetchGPSCoordinates(facility);
 		return facilityRepository.save(facility);
 	}
 
@@ -83,6 +82,12 @@ public class FacilityServiceImpl implements FacilityService {
 	@Override
 	public List<Facility> findByPieceOfFurnitureNeededId(Long pieceOfFurnitureId) {
 		return facilityRepository.findByPieceOfFurnitureNeededId(pieceOfFurnitureId);
+	}
+
+	@Override
+	public Facility addAndFetchCoordinates(Facility facility) {
+		new CoordinateFetcher().addGPStoFacility(facility);
+		return add(facility);
 	}
 
 }

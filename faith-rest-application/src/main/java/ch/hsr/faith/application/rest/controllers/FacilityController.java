@@ -52,7 +52,7 @@ public class FacilityController extends AbstractController {
 	@ResponseBody
 	@Secured("ROLE_USER")
 	public BaseJSONResponse addFacility(Model model, @Valid @RequestBody Facility facility) {
-		return createResponse(BaseJSONResponse.STATUS_SUCCESS, this.facilityService.add(facility));
+		return createResponse(BaseJSONResponse.STATUS_SUCCESS, this.facilityService.addAndFetchCoordinates(facility));
 	}
 
 	@RequestMapping(value = "/first", method = RequestMethod.GET)
