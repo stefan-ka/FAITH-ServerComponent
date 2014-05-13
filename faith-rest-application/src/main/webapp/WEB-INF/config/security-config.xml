@@ -9,7 +9,6 @@
 
 	<http auto-config='true'>
 		<intercept-url pattern="/useraccount/login" access="ROLE_USER" />
-		<intercept-url pattern="facilities/findUsersFacilities" access="ROLE_USER" />
 		<http-basic />
 	</http>
 <!-- 

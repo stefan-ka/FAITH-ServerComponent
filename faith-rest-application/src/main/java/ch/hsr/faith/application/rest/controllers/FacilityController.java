@@ -51,11 +51,11 @@ public class FacilityController extends AbstractController {
 	@RequestMapping(value = "/save", method = RequestMethod.POST, consumes = "application/json")
 	@ResponseBody
 	@Secured("ROLE_USER")
-	public BaseJSONResponse addFacility(Model model, @Valid @RequestBody Facility facility) throws FAITHException {
+	public BaseJSONResponse saveFacility(Model model, @Valid @RequestBody Facility facility) throws FAITHException {
+		facility.setUserAccount(getLoggedInUser());
 		if (facility.getId() != null && facility.getId() > 0) {
 			return createResponse(BaseJSONResponse.STATUS_SUCCESS, this.facilityService.save(facility));
 		} else {
-			facility.setUserAccount(getLoggedInUser());
 			return createResponse(BaseJSONResponse.STATUS_SUCCESS, this.facilityService.addAndFetchCoordinates(facility));
 		}
 	}
