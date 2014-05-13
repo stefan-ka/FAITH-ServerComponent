@@ -11,7 +11,7 @@ public interface FacilityService {
 
 	public List<Facility> findAll();
 
-	public Facility add(Facility facility);
+	public Facility save(Facility facility);
 
 	public Facility addAndFetchCoordinates(Facility facility);
 

@@ -1,11 +1,7 @@
 package ch.hsr.faith.service.impl;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
 
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,7 +26,7 @@ public class FacilityServiceImpl implements FacilityService {
 	}
 
 	@Override
-	public Facility add(Facility facility) {
+	public Facility save(Facility facility) {
 		return facilityRepository.save(facility);
 	}
 
@@ -69,7 +65,7 @@ public class FacilityServiceImpl implements FacilityService {
 	@Override
 	public Facility addAndFetchCoordinates(Facility facility) {
 		new CoordinateFetcher().addGPStoFacility(facility);
-		return add(facility);
+		return save(facility);
 	}
 
 }

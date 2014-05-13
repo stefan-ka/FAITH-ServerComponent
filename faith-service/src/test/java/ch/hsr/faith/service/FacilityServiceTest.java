@@ -27,10 +27,10 @@ public class FacilityServiceTest {
 	public void setUp() {
 		organization1 = new Facility();
 		organization1.setName("Org1");
-		organization1 = facilityService.add(organization1);
+		organization1 = facilityService.save(organization1);
 		organization2 = new Facility();
 		organization2.setName("Org2");
-		organization2 = facilityService.add(organization2);
+		organization2 = facilityService.save(organization2);
 	}
 
 	@Test
@@ -57,7 +57,7 @@ public class FacilityServiceTest {
 	public void testOrgAdd() {
 		Facility myOrg = new Facility();
 		myOrg.setName("myName");
-		myOrg = facilityService.add(myOrg);
+		myOrg = facilityService.save(myOrg);
 		assertEquals(myOrg, facilityService.get(myOrg.getId()));
 	}
 
