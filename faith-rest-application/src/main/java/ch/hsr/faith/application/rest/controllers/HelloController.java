@@ -29,19 +29,4 @@ public class HelloController extends AbstractController {
 		return message;
 	}
 
-	@RequestMapping(value = "/secured", method = RequestMethod.GET)
-	@ResponseBody
-	public BaseJSONResponse showSecuredMethod(Model model) {
-		BaseJSONResponse message = new BaseJSONResponse(BaseJSONResponse.STATUS_SUCCESS);
-		message.setData(userAccountService.secureMethod());
-		return message;
-	}
-
-	@RequestMapping(value = "/nonsecured", method = RequestMethod.GET)
-	@ResponseBody
-	public BaseJSONResponse showNonSecuredMethod(Model model) {
-		BaseJSONResponse message = new BaseJSONResponse(BaseJSONResponse.STATUS_SUCCESS);
-		message.setData(userAccountService.nonSecureMethod());
-		return message;
-	}
 }
