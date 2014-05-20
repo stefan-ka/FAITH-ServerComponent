@@ -4,7 +4,6 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -28,12 +27,6 @@ public class HelloController extends AbstractController {
 		message.setData("Welcome to the FAITH Rest Services!");
 		logger.info("FAITH Hello Controller was called...");
 		return message;
-	}
-
-	@RequestMapping(value = "/mu-a8bdc266-28765094-58641ee2-a510e9ca", method = RequestMethod.GET)
-	@ResponseBody
-	public String authorizeBlitz() {
-		return "42";
 	}
 
 	@RequestMapping(value = "/secured", method = RequestMethod.GET)
