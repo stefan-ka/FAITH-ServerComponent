@@ -7,7 +7,7 @@
 	<parent>
 		<artifactId>faith-server</artifactId>
 		<groupId>ch.hsr.faith</groupId>
-		<version>1.0.0</version>
+		<version>1.0.1-SNAPSHOT</version>
 	</parent>
 
 	<properties>
@@ -31,12 +31,12 @@
 			<dependency>
 				<groupId>ch.hsr.faith</groupId>
 				<artifactId>faith-repository</artifactId>
-				<version>1.0.0</version>
+				<version>1.0.1-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>ch.hsr.faith</groupId>
 				<artifactId>faith-service</artifactId>
-				<version>1.0.0</version>
+				<version>1.0.1-SNAPSHOT</version>
 			</dependency>
 
 			<!-- Spring dependencies -->
