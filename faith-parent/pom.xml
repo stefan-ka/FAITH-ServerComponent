@@ -13,7 +13,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<faith-domain-version>1.0.1-SNAPSHOT</faith-domain-version>
+		<faith-domain-version>1.0.1</faith-domain-version>
 		<spring-version>4.0.2.RELEASE</spring-version>
 		<spring-data-version>1.4.4.RELEASE</spring-data-version>
 		<spring-security-version>3.2.3.RELEASE</spring-security-version>
